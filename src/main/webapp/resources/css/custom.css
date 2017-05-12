@@ -1,0 +1,184 @@
+.table > tr > td {vertical-align:top}
+#phone_cart {background:#eee;padding:10px 0}
+body {margin-bottom:50px}
+.noTop {border-top:none !important;padding:0 8px !important}
+.longcart {overflow-y:scroll;overflow-x:hidden;height:95vh;font-size:90%}
+#search {
+    position: fixed;
+    top: 60px;
+    width: 30%;
+    height: 22px;
+	clear: right;
+}
+
+.cart__products {
+    overflow: visible;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size:85%;
+}
+.cart__products--scroll {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+
+
+.cart-container.cart-container--vendor .js-sticky-element {
+    z-index: 990
+}
+
+.clickable-row {
+    cursor: pointer; cursor: hand;
+}
+
+.clickable-row:hover {opacity: 0.7;}
+
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    
+
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+}
+
+.modal_inner  > p,
+.modal_inner  > textarea,
+.modal_inner  > button,
+.modal_inner  > img {
+    width:100%;
+}
+
+.modal_inner {
+    
+    display: block;
+    width:100%;
+    height:100%;
+    
+    position: relative; /* Stay in place */
+
+    
+    overflow-x: hidden;
+    overflow-y:auto;
+    
+}
+
+.modal_outer {
+    
+    display: block;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    top:10%;
+    width: 500px;
+    max-height:80%;
+    position: fixed; /* Stay in place */
+    background-color: rgb(255,255,255); /* Fallback color */
+    padding:5px;
+    font-size:20px;
+
+    
+}
+
+.modal_inner thead {
+    font-size:40px;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 36px;
+    height:36px;
+    color: #f1f1f1;
+
+    background-image: url(fancybox_sprite.png);
+    opacity:0.9;
+}
+
+
+
+.close:hover,
+.close:focus {
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 500px){
+    .modal_inner {
+        width:100%;
+        height:100%;
+        position: relative;
+    }
+    
+    .modal_outer {
+        top: 5%;
+        display: block;
+        left:0;
+        width:100%;
+        max-height:85%;
+        position: relative; /* Stay in place */
+        padding:3%;
+    }
+
+    
+    .close {
+        position: absolute;
+        right:0;
+    }
+}
+
+textarea {
+   resize: none;
+}
+
+.modal_rc {
+    margin:4px;
+    
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+    width:100%;
+}
+
+.modal_rc:hover {
+    background:red;
+}
+
+.modal_rc label {
+    float:left;
+    width:100%;
+}
+
+.modal_rc label span {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+}
+
+.modal_rc label input {
+    display:none;
+}
