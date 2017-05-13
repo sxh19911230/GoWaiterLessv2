@@ -47,5 +47,17 @@ public class MenuController {
 		menuService.deleteMenu(menuId);
 		return "success";
 	}
+	@RequestMapping(value="/{menuId}/submenu/{subMenuId}",method=RequestMethod.POST)
+	String addSubMenu(@PathVariable long menuId, @PathVariable long subMenuId) {
+		menuService.addSubMenu(menuId,subMenuId);
+		return "success";
+	}
+	
+	@RequestMapping(value="/{menuId}/submenu/{subMenuId}",method=RequestMethod.DELETE)
+	String deleteSubMenu(@PathVariable long menuId, @PathVariable long subMenuId) {
+		menuService.deleteSubMenu(menuId,subMenuId);
+		return "success";
+	}
+	
 
 }

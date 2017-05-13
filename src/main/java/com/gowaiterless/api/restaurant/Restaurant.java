@@ -3,9 +3,7 @@ package com.gowaiterless.api.restaurant;
 import java.util.Collection;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,10 +21,15 @@ public class Restaurant {
 	String fax;
 	String email;
 	@JsonIgnore
-	@OneToMany (mappedBy="restaurant", fetch=FetchType.EAGER)
+	@OneToMany (mappedBy="restaurant")
 	Collection<Menu> menus;
 	
+	@JsonIgnore
+	@OneToMany (mappedBy="restaurant")
+	Collection<SubMenu> subMenus;
+	
 	public Restaurant() {}
+	
 	public Restaurant(String id) {
 		this.id=id;
 	}
@@ -78,5 +81,11 @@ public class Restaurant {
 	}
 	public void setMenus(Collection<Menu> menus) {
 		this.menus = menus;
+	}
+	public Collection<SubMenu> getSubMenus() {
+		return subMenus;
+	}
+	public void setSubMenus(Collection<SubMenu> subMenus) {
+		this.subMenus = subMenus;
 	}
 }

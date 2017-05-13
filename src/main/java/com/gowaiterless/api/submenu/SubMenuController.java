@@ -20,29 +20,29 @@ public class SubMenuController {
 		return subMenuService.getSubMenus(menuId);
 	}
 	
-	@RequestMapping(value="menu/{menuId}/submenu/{subMenuId}", method=RequestMethod.GET)
+	@RequestMapping(value="submenu/{subMenuId}", method=RequestMethod.GET)
 	SubMenu getSubMenu(@PathVariable long subMenuId) {
 		return subMenuService.getSubMenu(subMenuId);
 	}
 	
-	@RequestMapping(value="submenu/{subMenuId}", method=RequestMethod.GET)
+	@RequestMapping(value="submenu", method=RequestMethod.GET)
 	List<SubMenu> getRestaurantSubMenus(@PathVariable String restaurantId) {
 		return subMenuService.getSubMenus(restaurantId);
 	}
 	
-	@RequestMapping(value="menu/{menuId}/submenu", method=RequestMethod.POST)
-	String addSubMenu(@RequestBody SubMenu subMenu) {
-		subMenuService.addSubMenu(subMenu);
+	@RequestMapping(value="submenu", method=RequestMethod.POST)
+	String addSubMenu(@PathVariable String restaurantId, @RequestBody SubMenu subMenu) {
+		subMenuService.addSubMenu(restaurantId, subMenu);
 		return "success";
 	}
 	
-	@RequestMapping(value="menu/{menuId}/submenu/{subMenuId}", method=RequestMethod.PUT)
-	String updateMenu(@RequestBody SubMenu subMenu) {
-		subMenuService.addSubMenu(subMenu);
+	@RequestMapping(value="submenu/{subMenuId}", method=RequestMethod.PUT)
+	String updateMenu(@PathVariable String restaurantId, @RequestBody SubMenu subMenu) {
+		subMenuService.addSubMenu(restaurantId, subMenu);
 		return "success";
 	}
 	
-	@RequestMapping(value="menu/{menuId}/submenu/{subMenuId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="submenu/{subMenuId}", method=RequestMethod.DELETE)
 	String deleteMenu(@PathVariable long subMenuId) {
 		subMenuService.deleteSubMenu(subMenuId);
 		return "success";

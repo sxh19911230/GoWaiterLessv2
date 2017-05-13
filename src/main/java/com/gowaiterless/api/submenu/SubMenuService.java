@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gowaiterless.api.restaurant.Restaurant;
+
 
 @Service
 public class SubMenuService {
@@ -17,17 +19,19 @@ public class SubMenuService {
 	public SubMenu getSubMenu(long id) {
 		return subMenuRepository.findOne(id);
 	}
-	public void addSubMenu(SubMenu s) {
+	public void addSubMenu(String restaurantId, SubMenu s) {
+		s.setRestaurant(new Restaurant(restaurantId));
 		subMenuRepository.save(s);
 	}
-	public void updateSubMenu(SubMenu s) {
+	public void updateSubMenu(String restaurantId, SubMenu s) {
+		s.setRestaurant(new Restaurant(restaurantId));
 		subMenuRepository.save(s);
 	}
 	public void deleteSubMenu(long id) {
 		subMenuRepository.delete(id);
 	}
 	public List<SubMenu> getSubMenus(String restaurantId) {
-		return subMenuRepository.findByMenusRestaurantId(restaurantId);
+		return subMenuRepository.findByRestaurantId(restaurantId);
 	}
 
 }

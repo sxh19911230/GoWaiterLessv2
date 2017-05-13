@@ -29,10 +29,22 @@ public class SubMenu {
 	@ManyToMany(mappedBy="subMenus")
 	private Collection<Menu> menus;
 	
+	@JsonIgnore
+	@ManyToOne
+	private Restaurant restaurant;
+	
 	public SubMenu(){}
 	public SubMenu(long id){subMenuId=id;}
 	
 	
+	
+	
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
 	public Collection<Menu> getMenus() {
 		return menus;
 	}
