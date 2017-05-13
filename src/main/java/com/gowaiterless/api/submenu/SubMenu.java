@@ -17,8 +17,8 @@ import com.gowaiterless.api.restaurant.Restaurant;
 public class SubMenu {
 	@Id @GeneratedValue
 	private long subMenuId;
-	
 	private String subMenuName;
+	private String subMenuDescription;
 	private boolean inclusive;
 	private int allowed;
 	private int free;
@@ -89,6 +89,12 @@ public class SubMenu {
 	}
 	public void setItems(Collection<Item> items) {
 		this.items = items;
+	}
+	public String getSubMenuDescription() {
+		return subMenuDescription;
+	}
+	public void setSubMenuDescription(String subMenuDescription) {
+		this.subMenuDescription = subMenuDescription;
 	}
 	
 

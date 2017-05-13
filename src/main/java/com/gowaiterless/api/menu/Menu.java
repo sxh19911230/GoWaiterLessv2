@@ -16,6 +16,7 @@ import com.gowaiterless.api.submenu.SubMenu;
 public class Menu {
 	@Id @GeneratedValue
 	private long menuId;
+	private String menuCode;
 	private String dishName;
 	private String dishDescription;
 	private String picture;
@@ -80,6 +81,12 @@ public class Menu {
 	}
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+	public String getMenuCode() {
+		return menuCode;
+	}
+	public void setMenuCode(String menuCode) {
+		this.menuCode = menuCode;
 	}
 	
 }
