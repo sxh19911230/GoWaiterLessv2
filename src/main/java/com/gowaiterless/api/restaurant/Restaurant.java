@@ -3,15 +3,16 @@ package com.gowaiterless.api.restaurant;
 import java.util.Collection;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gowaiterless.api.menu.Menu;
 
 @Entity
 public class Restaurant {
-	@Id @GeneratedValue
+	@Id
 	String id;
 	String name;
 	Address address;
@@ -19,8 +20,15 @@ public class Restaurant {
 	String telephone;
 	String fax;
 	String email;
-	@OneToMany (mappedBy="restaurantId")
+	@JsonIgnore
+	@OneToMany (mappedBy="restaurant", fetch=FetchType.EAGER)
 	Collection<Menu> menus;
+	
+	public Restaurant() {}
+	public Restaurant(String id) {
+		this.id=id;
+	}
+	
 	public String getId() {
 		return id;
 	}

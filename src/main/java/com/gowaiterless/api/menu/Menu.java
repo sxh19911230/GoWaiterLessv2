@@ -7,24 +7,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import com.gowaiterless.api.submenu.SubMenu;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gowaiterless.api.restaurant.Restaurant;
 
 @Entity
 public class Menu {
 	@Id @GeneratedValue
-	int menuId;
-	String dishName;
-	String dishDescription;
-	String picture;
-	int basePriceInCent;
+	private long menuId;
+	private String dishName;
+	private String dishDescription;
+	private String picture;
+	private int basePriceInCent;
+	@JsonIgnore
 	@ManyToOne
-	String restaurantId;
-	@ManyToMany
-	Collection<SubMenu> subMenus;
-	public int getMenuId() {
+	private Restaurant restaurant;
+	@JsonIgnore
+	//TODO SubMenu
+	private boolean active;
+	
+	public long getMenuId() {
 		return menuId;
 	}
-	public void setMenuId(int menuId) {
+	public void setMenuId(long menuId) {
 		this.menuId = menuId;
 	}
 	public String getDishName() {
@@ -51,18 +56,19 @@ public class Menu {
 	public void setBasePriceInCent(int basePriceInCent) {
 		this.basePriceInCent = basePriceInCent;
 	}
-	public String getRestaurantId() {
-		return restaurantId;
+
+	public Restaurant getRestaurant() {
+		return restaurant;
 	}
-	public void setRestaurantId(String restaurantId) {
-		this.restaurantId = restaurantId;
-	}
-	public Collection<SubMenu> getSubMenus() {
-		return subMenus;
-	}
-	public void setSubMenus(Collection<SubMenu> subMenus) {
-		this.subMenus = subMenus;
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	
 }

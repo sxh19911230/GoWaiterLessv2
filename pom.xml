@@ -45,6 +45,22 @@
     <version>4.3.8.RELEASE</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+<dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-commons</artifactId>
+    <version>1.13.3.RELEASE</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+<dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-jpa</artifactId>
+    <version>1.11.3.RELEASE</version>
+</dependency>
+
+
 
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 <dependency>
@@ -87,8 +103,27 @@
     <version>2.9.0.pr3</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aspects</artifactId>
+    <version>4.3.8.RELEASE</version>
+</dependency>
 
 
+
+<!-- Dependencies for Eclipse JPA Persistence API -->
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>2.5.0-RC1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.eclipse.persistence</groupId>
+					<artifactId>commonj.sdo</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
     
     
   </dependencies>
