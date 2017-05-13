@@ -10,33 +10,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("v1")
+@RequestMapping("restaurant")
 public class RestaurantController {
 	@Autowired
 	RestaurantService restaurantService;
 	
-	@RequestMapping(value="/restaurant", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	List<Restaurant> getRestaurants(){
 		return restaurantService.getRestaurants();
 	}
-	@RequestMapping(value="/restaurant/{restaurantId}",method=RequestMethod.GET)
+	@RequestMapping(value="/{restaurantId}",method=RequestMethod.GET)
 	Restaurant getRestaurant(@PathVariable String restaurantId){
 		return restaurantService.getRestaurant(restaurantId);
 	}
 	
-	@RequestMapping(value="/restaurant",method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	String addRestaurant(@RequestBody Restaurant restaurant) {
 		restaurantService.addRestaurant(restaurant);
 		return "success";
 	}
 	
-	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.PUT)
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	String updateRestaurant(@RequestBody Restaurant restaurant) {
 		restaurantService.updateRestaurant(restaurant);
 		return "success";
 	}
 	
-	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	String deleteRestaurant(@PathVariable String id) {
 		restaurantService.deleteRestaurant(id);
 		return "success";

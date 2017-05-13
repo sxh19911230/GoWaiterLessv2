@@ -17,7 +17,7 @@ id="WebApp_ID" version="3.1">
   
   <servlet-mapping>
   <servlet-name>gowaiterlessapi</servlet-name>
-  <url-pattern>/api/*</url-pattern>
+  <url-pattern>/api/v1/*</url-pattern>
   </servlet-mapping>
 
 </web-app>

@@ -16,7 +16,8 @@ import com.gowaiterless.api.restaurant.Restaurant;
 @Entity
 public class SubMenu {
 	@Id @GeneratedValue
-	private int id;
+	private long subMenuId;
+	
 	private String subMenuName;
 	private boolean inclusive;
 	private int allowed;
@@ -28,6 +29,9 @@ public class SubMenu {
 	@ManyToMany(mappedBy="subMenus")
 	private Collection<Menu> menus;
 	
+	public SubMenu(){}
+	public SubMenu(long id){subMenuId=id;}
+	
 	
 	public Collection<Menu> getMenus() {
 		return menus;
@@ -36,13 +40,14 @@ public class SubMenu {
 		this.menus = menus;
 	}
 	
+	public long getSubMenuId() {
+		return subMenuId;
+	}
+	public void setSubMenuId(long subMenuId) {
+		this.subMenuId = subMenuId;
+	}
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getSubMenuName() {
 		return subMenuName;
 	}

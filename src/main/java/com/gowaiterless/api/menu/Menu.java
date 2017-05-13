@@ -3,6 +3,7 @@ package com.gowaiterless.api.menu;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -25,13 +26,16 @@ public class Menu {
 	private Restaurant restaurant;
 	@JsonIgnore
 	@ManyToMany
-	private Collection<SubMenu> subMenus; 
+	private Collection<SubMenu> subMenus;
 	private boolean active;
 	
-	public Collection<SubMenu> getSubmenus() {
+	public Menu(){}
+	public Menu(long id) {menuId=id;}
+	
+	public Collection<SubMenu> getSubMenus() {
 		return subMenus;
 	}
-	public void setSubmenus(Collection<SubMenu> submenus) {
+	public void setSubMenus(Collection<SubMenu> submenus) {
 		this.subMenus = submenus;
 	}
 	public long getMenuId() {

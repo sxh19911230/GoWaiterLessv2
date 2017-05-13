@@ -14,35 +14,35 @@ import com.gowaiterless.api.restaurant.Restaurant;
 
 
 @RestController
-@RequestMapping("v1")
+@RequestMapping("restaurant/{restaurantId}/menu")
 public class MenuController {
 	@Autowired
 	MenuService menuService;
 	
-	@RequestMapping(value="/restaurant/{restaurantId}/menu", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	List<Menu> getMenus(@PathVariable String restaurantId) {
 		return menuService.getMenus(restaurantId);
 	}
 	
-	@RequestMapping(value="/restaurant/{restaurantId}/menu/{menuId}", method=RequestMethod.GET) 
+	@RequestMapping(value="/{menuId}", method=RequestMethod.GET) 
 	Menu getMenu(@PathVariable long menuId){
 		return menuService.getMenu(menuId);
 	}
-	@RequestMapping(value="/restaurant/{restaurantId}/menu", method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	String addMenu(@RequestBody Menu m, @PathVariable String restaurantId) {
 		m.setRestaurant(new Restaurant(restaurantId));
 		menuService.addMenu(m);
 		return "success";
 	}
 	
-	@RequestMapping(value="/restaurant/{restaurantId}/menu/{menuId}", method=RequestMethod.PUT)
+	@RequestMapping(value="/{menuId}", method=RequestMethod.PUT)
 	String updateMenu(@RequestBody Menu m, @PathVariable String restaurantId) {
 		m.setRestaurant(new Restaurant(restaurantId));
 		
 		menuService.updateMenu(m);
 		return "success";
 	}
-	@RequestMapping(value="/restaurant/{restaurantId}/menu/{menuId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/{menuId}", method=RequestMethod.DELETE)
 	String deleteMenu(@PathVariable long menuId) {
 		menuService.deleteMenu(menuId);
 		return "success";

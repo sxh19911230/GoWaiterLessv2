@@ -26,5 +26,8 @@ public class SubMenuService {
 	public void deleteSubMenu(long id) {
 		subMenuRepository.delete(id);
 	}
+	public List<SubMenu> getSubMenus(String restaurantId) {
+		return subMenuRepository.findByMenusRestaurantId(restaurantId);
+	}
 
 }
