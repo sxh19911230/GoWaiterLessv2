@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gowaiterless.api.restaurant.Restaurant;
+import com.gowaiterless.api.submenu.SubMenu;
 
 @Entity
 public class Menu {
@@ -23,9 +24,16 @@ public class Menu {
 	@ManyToOne
 	private Restaurant restaurant;
 	@JsonIgnore
-	//TODO SubMenu
+	@ManyToMany
+	private Collection<SubMenu> subMenus; 
 	private boolean active;
 	
+	public Collection<SubMenu> getSubmenus() {
+		return subMenus;
+	}
+	public void setSubmenus(Collection<SubMenu> submenus) {
+		this.subMenus = submenus;
+	}
 	public long getMenuId() {
 		return menuId;
 	}
