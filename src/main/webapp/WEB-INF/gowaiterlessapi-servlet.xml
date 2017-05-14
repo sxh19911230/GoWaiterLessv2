@@ -6,11 +6,13 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">  
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">  
 
 	<context:component-scan base-package="com.gowaiterless.api"></context:component-scan>
 	<context:annotation-config/>
@@ -51,6 +53,31 @@
 
     <bean id="persistenceExceptionTranslationPostProcessor"
         class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+        
+    <security:http entry-point-ref="restAuthenticationEntryPoint">
+      <security:intercept-url pattern="/api/v1/**" access="hasRole('ROLE_ADMIN')"/>
+ 
+      <security:form-login
+         authentication-success-handler-ref="mySuccessHandler"
+         authentication-failure-handler-ref="myFailureHandler"
+      />
+ 
+      <security:logout />
+   </security:http>
+   
+   <bean id="mySuccessHandler"
+      class="com.gowaiterless.api.security.MySavedRequestAwareAuthenticationSuccessHandler"/>
+   <bean id="myFailureHandler" class=
+     "org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
+ 
+   <security:authentication-manager alias="authenticationManager">
+      <security:authentication-provider>
+         <security:user-service>
+            <security:user name="temporary" password="temporary" authorities="ROLE_ADMIN"/>
+            <security:user name="user" password="user" authorities="ROLE_USER"/>
+         </security:user-service>
+      </security:authentication-provider>
+   </security:authentication-manager>
 	
 </beans>
 
