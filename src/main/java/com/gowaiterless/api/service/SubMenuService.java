@@ -1,4 +1,4 @@
-package com.gowaiterless.api.Service;
+package com.gowaiterless.api.service;
 
 import java.util.List;
 

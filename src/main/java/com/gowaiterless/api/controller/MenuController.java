@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gowaiterless.Menu;
 import com.gowaiterless.Restaurant;
-import com.gowaiterless.api.Service.MenuService;
+import com.gowaiterless.api.service.MenuService;
 
 
 @RestController
