@@ -54,30 +54,7 @@
     <bean id="persistenceExceptionTranslationPostProcessor"
         class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
         
-    <security:http entry-point-ref="restAuthenticationEntryPoint">
-      <security:intercept-url pattern="/api/v1/**" access="hasRole('ROLE_ADMIN')"/>
- 
-      <security:form-login
-         authentication-success-handler-ref="mySuccessHandler"
-         authentication-failure-handler-ref="myFailureHandler"
-      />
- 
-      <security:logout />
-   </security:http>
-   
-   <bean id="mySuccessHandler"
-      class="com.gowaiterless.api.security.MySavedRequestAwareAuthenticationSuccessHandler"/>
-   <bean id="myFailureHandler" class=
-     "org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
- 
-   <security:authentication-manager alias="authenticationManager">
-      <security:authentication-provider>
-         <security:user-service>
-            <security:user name="temporary" password="temporary" authorities="ROLE_ADMIN"/>
-            <security:user name="user" password="user" authorities="ROLE_USER"/>
-         </security:user-service>
-      </security:authentication-provider>
-   </security:authentication-manager>
+
 	
 </beans>
 
