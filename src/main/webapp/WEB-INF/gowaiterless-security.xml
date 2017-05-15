@@ -6,21 +6,17 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 		
 	<http auto-config="true" create-session="stateless">
-    <intercept-url pattern="/api/v1/**" access="hasRole('ROLE_ADMIN')"/>
+    <intercept-url pattern="/api/v1/**" access="hasRole('ROLE_USER')"/>
     <http-basic />
     <csrf disabled="true"/>
 	</http>
-   
-   
- 
-   <authentication-manager alias="authenticationManager">
+    <authentication-manager alias="authenticationManager">
       <authentication-provider>
          <user-service>
-            <user name="admin" password="admin" authorities="ROLE_ADMIN"/>
-            <user name="user" password="user" authorities="ROLE_USER"/>
+            <user name="common_api_access" password="qwerty" authorities="ROLE_USER"/>
          </user-service>
       </authentication-provider>
-   </authentication-manager>
+    </authentication-manager>
 		
 		
 </beans:beans>
