@@ -1,4 +1,4 @@
-package com.gowaiterless.api.restaurant;
+package com.gowaiterless.api.controller;
 
 import java.util.List;
 
@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.gowaiterless.Restaurant;
+import com.gowaiterless.api.Service.RestaurantService;
 
 @RestController
 @RequestMapping("restaurant")

@@ -1,4 +1,4 @@
-package com.gowaiterless.api.submenu;
+package com.gowaiterless;
 
 import java.util.Collection;
 import javax.persistence.ElementCollection;
@@ -11,8 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gowaiterless.api.menu.Menu;
-import com.gowaiterless.api.restaurant.Restaurant;
 
 @Entity
 public class SubMenu {

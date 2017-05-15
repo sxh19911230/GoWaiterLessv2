@@ -1,4 +1,4 @@
-package com.gowaiterless.api.restaurant;
+package com.gowaiterless;
 
 import java.util.TimeZone;
 

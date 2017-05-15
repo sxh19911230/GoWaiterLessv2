@@ -1,4 +1,4 @@
-package com.gowaiterless.api.menu;
+package com.gowaiterless.api.Service;
 
 import java.util.List;
 
@@ -7,7 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gowaiterless.api.submenu.SubMenu;
+import com.gowaiterless.Menu;
+import com.gowaiterless.SubMenu;
+import com.gowaiterless.api.repository.MenuRepository;
 
 @Service
 @Transactional

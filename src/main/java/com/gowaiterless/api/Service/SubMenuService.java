@@ -1,11 +1,13 @@
-package com.gowaiterless.api.submenu;
+package com.gowaiterless.api.Service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gowaiterless.api.restaurant.Restaurant;
+import com.gowaiterless.Restaurant;
+import com.gowaiterless.SubMenu;
+import com.gowaiterless.api.repository.SubMenuRepository;
 
 
 @Service

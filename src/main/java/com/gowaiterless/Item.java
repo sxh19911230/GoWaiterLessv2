@@ -1,4 +1,4 @@
-package com.gowaiterless.api.submenu;
+package com.gowaiterless;
 
 import javax.persistence.Embeddable;
 

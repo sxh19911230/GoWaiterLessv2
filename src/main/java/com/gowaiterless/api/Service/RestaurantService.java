@@ -1,10 +1,13 @@
-package com.gowaiterless.api.restaurant;
+package com.gowaiterless.api.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.gowaiterless.Restaurant;
+import com.gowaiterless.api.repository.RestaurantRepository;
 
 @Service
 public class RestaurantService {

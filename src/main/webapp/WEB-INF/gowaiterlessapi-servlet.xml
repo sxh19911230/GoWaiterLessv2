@@ -22,12 +22,12 @@
 
 	<mvc:annotation-driven />
 	
-	<jpa:repositories base-package="com.gowaiterless.api" entity-manager-factory-ref="emf"/>
+	<jpa:repositories base-package="com.gowaiterless.api.repository" entity-manager-factory-ref="emf"/>
 
 	<bean id="emf"
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="com.gowaiterless.api"/>
+        <property name="packagesToScan" value="com.gowaiterless"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
         </property>
