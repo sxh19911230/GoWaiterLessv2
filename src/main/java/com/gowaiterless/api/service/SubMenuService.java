@@ -7,33 +7,58 @@ import org.springframework.stereotype.Service;
 
 import com.gowaiterless.Restaurant;
 import com.gowaiterless.SubMenu;
+import com.gowaiterless.api.repository.RestaurantRepository;
 import com.gowaiterless.api.repository.SubMenuRepository;
+import com.gowaiterless.exception.ResourceNotFoundException;
 
 
 @Service
 public class SubMenuService {
 	@Autowired
 	SubMenuRepository subMenuRepository;
+	@Autowired
+	RestaurantRepository restaurantRepository;
 	
-	public List<SubMenu> getSubMenus(long menuId) {
+	public List<SubMenu> getSubMenus(String restaurantId, long menuId) {
+		getRestaurant(restaurantId);
 		return subMenuRepository.findByMenusMenuId(menuId);
 	}
-	public SubMenu getSubMenu(long id) {
-		return subMenuRepository.findOne(id);
+	public SubMenu getSubMenu(String restaurantId, long subMenuId) {
+		getRestaurant(restaurantId);
+		return getSubMenu(subMenuId);
 	}
-	public void addSubMenu(String restaurantId, SubMenu s) {
-		s.setRestaurant(new Restaurant(restaurantId));
-		subMenuRepository.save(s);
+	public SubMenu addSubMenu(String restaurantId, SubMenu s) {
+		s.setSubMenuId(0);
+		s.setRestaurant(getRestaurant(restaurantId));
+		subMenuRepository.saveAndFlush(s);
+		return s;
 	}
-	public void updateSubMenu(String restaurantId, SubMenu s) {
-		s.setRestaurant(new Restaurant(restaurantId));
-		subMenuRepository.save(s);
+	public SubMenu updateSubMenu(String restaurantId, long subMenuId, SubMenu s) {
+		getSubMenu(subMenuId);
+		s.setSubMenuId(subMenuId);
+		s.setRestaurant(getRestaurant(restaurantId));
+		subMenuRepository.saveAndFlush(s);
+		return s;
 	}
-	public void deleteSubMenu(long id) {
-		subMenuRepository.delete(id);
+	public void deleteSubMenu(String restaurantId, long subMenuId) {
+		getRestaurant(restaurantId);
+		subMenuRepository.delete(getSubMenu(subMenuId));
 	}
 	public List<SubMenu> getSubMenus(String restaurantId) {
+		getRestaurant(restaurantId);
 		return subMenuRepository.findByRestaurantId(restaurantId);
+	}
+	
+	private Restaurant getRestaurant(String restaurantId) {
+		Restaurant r = restaurantRepository.findOne(restaurantId);
+		if(r==null) throw new ResourceNotFoundException();
+		return r;
+	}
+	
+	private SubMenu getSubMenu(long subMenuId) {
+		SubMenu s = subMenuRepository.findOne(subMenuId);
+		if(s==null) throw new ResourceNotFoundException();
+		return s;
 	}
 
 }

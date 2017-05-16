@@ -3,13 +3,18 @@ package com.gowaiterless.api.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gowaiterless.Restaurant;
 import com.gowaiterless.api.repository.RestaurantRepository;
+import com.gowaiterless.exception.ResourceDuplicationException;
+import com.gowaiterless.exception.ResourceNotFoundException;
 
 @Service
+@Transactional
 public class RestaurantService {
 	
 	@Autowired
@@ -21,15 +26,28 @@ public class RestaurantService {
 		return r;
 	}
 	public Restaurant getRestaurant(String id) {
-		return restaurantReprository.findOne(id);
+		return checkRestaurant(id);
 	}
-	public void addRestaurant(Restaurant r) {
-		restaurantReprository.save(r);
+	public Restaurant addRestaurant(Restaurant r) {
+		Restaurant t = restaurantReprository.findOne(r.getId());
+		if (t != null) throw new ResourceDuplicationException();;
+		restaurantReprository.saveAndFlush(r);
+		return r;
 	}
-	public void updateRestaurant(Restaurant r) {
-		restaurantReprository.save(r);
+	public Restaurant updateRestaurant(String restaurantId, Restaurant r) {
+		checkRestaurant(restaurantId);
+		r.setId(restaurantId);
+		restaurantReprository.saveAndFlush(r);
+		return r;
 	}
 	public void deleteRestaurant(String id) {
+		checkRestaurant(id);
 		restaurantReprository.delete(id);
+	}
+	
+	private Restaurant checkRestaurant(String restaurantId) {
+		Restaurant r = restaurantReprository.findOne(restaurantId);
+		if (r == null) throw new ResourceNotFoundException();
+		return r;
 	}
 }

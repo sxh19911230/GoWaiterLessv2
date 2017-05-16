@@ -3,6 +3,8 @@ package com.gowaiterless.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,29 +21,27 @@ public class RestaurantController {
 	RestaurantService restaurantService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	List<Restaurant> getRestaurants(){
+	public List<Restaurant> getRestaurants(){
 		return restaurantService.getRestaurants();
 	}
 	@RequestMapping(value="/{restaurantId}",method=RequestMethod.GET)
-	Restaurant getRestaurant(@PathVariable String restaurantId){
+	public Restaurant getRestaurant(@PathVariable String restaurantId){
 		return restaurantService.getRestaurant(restaurantId);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	String addRestaurant(@RequestBody Restaurant restaurant) {
-		restaurantService.addRestaurant(restaurant);
-		return "success";
+	public ResponseEntity<Restaurant> addRestaurant(@RequestBody Restaurant restaurant) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(restaurantService.addRestaurant(restaurant));
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
-	String updateRestaurant(@RequestBody Restaurant restaurant) {
-		restaurantService.updateRestaurant(restaurant);
-		return "success";
+	public Restaurant updateRestaurant(@PathVariable String id, @RequestBody Restaurant restaurant) {
+		return restaurantService.updateRestaurant(id, restaurant);
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
-	String deleteRestaurant(@PathVariable String id) {
+	public ResponseEntity<?> deleteRestaurant(@PathVariable String id) {
 		restaurantService.deleteRestaurant(id);
-		return "success";
+		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 }
