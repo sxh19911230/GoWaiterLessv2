@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gowaiterless.Menu;
+import com.gowaiterless.SubMenu;
 import com.gowaiterless.api.service.MenuService;
 
 
@@ -45,15 +46,15 @@ public class MenuController {
 		menuService.deleteMenu(restaurantId, menuId);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
-	@RequestMapping(value="/{menuId}/addsubmenu/{subMenuId}",method=RequestMethod.POST)
-	public ResponseEntity<?> addSubMenu(@PathVariable long menuId, @PathVariable long subMenuId) {
-		menuService.addSubMenu(menuId,subMenuId);
+	@RequestMapping(value="/{menuId}/submenu",method=RequestMethod.POST)
+	public ResponseEntity<?> addSubMenu(@PathVariable long menuId, @RequestBody SubMenu subMenu) {
+		menuService.addSubMenu(menuId,subMenu.getSubMenuId());
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 	
-	@RequestMapping(value="/{menuId}/removesubmenu/{subMenuId}",method=RequestMethod.POST)
-	public ResponseEntity<?> deleteSubMenu(@PathVariable long menuId, @PathVariable long subMenuId) {
-		menuService.deleteSubMenu(menuId,subMenuId);
+	@RequestMapping(value="/{menuId}/submenu",method=RequestMethod.DELETE)
+	public ResponseEntity<?> deleteSubMenu(@PathVariable long menuId, @RequestBody SubMenu subMenu) {
+		menuService.deleteSubMenu(menuId,subMenu.getSubMenuId());
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 }

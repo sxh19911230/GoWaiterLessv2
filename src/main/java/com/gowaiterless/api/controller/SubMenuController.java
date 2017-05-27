@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gowaiterless.Restaurant;
 import com.gowaiterless.SubMenu;
 import com.gowaiterless.api.service.SubMenuService;
 
@@ -42,8 +41,8 @@ public class SubMenuController {
 	}
 	
 	@RequestMapping(value="submenu/{subMenuId}", method=RequestMethod.PUT)
-	public SubMenu updateMenu(@PathVariable String restaurantId, @RequestBody SubMenu subMenu) {
-		return subMenuService.addSubMenu(restaurantId, subMenu);
+	public SubMenu updateMenu(@PathVariable String restaurantId,@PathVariable long subMenuId, @RequestBody SubMenu subMenu) {
+		return subMenuService.updateSubMenu(restaurantId, subMenuId, subMenu);
 	}
 	
 	@RequestMapping(value="submenu/{subMenuId}", method=RequestMethod.DELETE)

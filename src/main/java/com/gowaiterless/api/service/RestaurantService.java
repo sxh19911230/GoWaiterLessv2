@@ -25,8 +25,10 @@ public class RestaurantService {
 		restaurantReprository.findAll().forEach(t->r.add(t));
 		return r;
 	}
-	public Restaurant getRestaurant(String id) {
-		return checkRestaurant(id);
+	public Restaurant getRestaurant(String restaurantId) {
+		Restaurant r = restaurantReprository.findOne(restaurantId);
+		if (r == null) throw new ResourceNotFoundException();
+		return r;
 	}
 	public Restaurant addRestaurant(Restaurant r) {
 		Restaurant t = restaurantReprository.findOne(r.getId());
@@ -35,19 +37,15 @@ public class RestaurantService {
 		return r;
 	}
 	public Restaurant updateRestaurant(String restaurantId, Restaurant r) {
-		checkRestaurant(restaurantId);
+		getRestaurant(restaurantId);
 		r.setId(restaurantId);
 		restaurantReprository.saveAndFlush(r);
 		return r;
 	}
 	public void deleteRestaurant(String id) {
-		checkRestaurant(id);
+		getRestaurant(id);
 		restaurantReprository.delete(id);
 	}
 	
-	private Restaurant checkRestaurant(String restaurantId) {
-		Restaurant r = restaurantReprository.findOne(restaurantId);
-		if (r == null) throw new ResourceNotFoundException();
-		return r;
-	}
+	
 }
