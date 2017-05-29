@@ -19,7 +19,7 @@ id="WebApp_ID" version="3.1">
   <url-pattern>/api/v1/*</url-pattern>
   </servlet-mapping>
 
-  
+
   <filter>
    <filter-name>springSecurityFilterChain</filter-name>
    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -30,16 +30,17 @@ id="WebApp_ID" version="3.1">
 </filter-mapping>
 
 
-<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+   <!-- The definition of the Root Spring Container shared by all Servlets and Filters    
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/gowaiterless-security.xml</param-value>
     </context-param>
-    
+     
     <listener>
        <listener-class>
            org.springframework.web.context.ContextLoaderListener
        </listener-class>
 </listener>
-    
+-->
+
 </web-app>

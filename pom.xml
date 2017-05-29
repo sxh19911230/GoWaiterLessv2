@@ -152,6 +152,13 @@
 	<version>1.6.11</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.6.0</version>
+</dependency>
+
 
 
 <!-- Dependencies for Eclipse JPA Persistence API -->
