@@ -1,4 +1,4 @@
-package com.gowaiterless;
+package com.gowaiterless.api;
 
 import java.util.Collection;
 

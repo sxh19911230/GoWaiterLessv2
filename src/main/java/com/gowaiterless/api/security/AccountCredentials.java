@@ -15,5 +15,4 @@ public class AccountCredentials {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gowaiterless.Restaurant;
+import com.gowaiterless.api.Restaurant;
 import com.gowaiterless.api.service.RestaurantService;
 
 @RestController

@@ -7,8 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gowaiterless.Restaurant;
-import com.gowaiterless.SubMenu;
+import com.gowaiterless.api.Restaurant;
+import com.gowaiterless.api.SubMenu;
 import com.gowaiterless.api.repository.RestaurantRepository;
 import com.gowaiterless.api.repository.SubMenuRepository;
 import com.gowaiterless.exception.ResourceNotFoundException;

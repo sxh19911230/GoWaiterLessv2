@@ -1,4 +1,4 @@
-package com.gowaiterless;
+package com.gowaiterless.api;
 
 import javax.persistence.Embeddable;
 
