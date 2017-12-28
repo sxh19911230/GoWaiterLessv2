@@ -22,7 +22,7 @@ public class SubMenu {
 	private int allowed;
 	private int free;
 	@ElementCollection (fetch=FetchType.EAGER)
-	private Collection<Item> items;
+	private Collection<Choice> choices;
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy="subMenus")
@@ -83,11 +83,11 @@ public class SubMenu {
 	public void setFree(int free) {
 		this.free = free;
 	}
-	public Collection<Item> getItems() {
-		return items;
+	public Collection<Choice> getItems() {
+		return choices;
 	}
-	public void setItems(Collection<Item> items) {
-		this.items = items;
+	public void setItems(Collection<Choice> choices) {
+		this.choices = choices;
 	}
 	public String getSubMenuDescription() {
 		return subMenuDescription;
