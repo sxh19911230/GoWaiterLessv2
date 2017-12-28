@@ -1,4 +1,4 @@
-package com.gowaiterless.api.controller;
+package com.gowaiterless.api.menuList.controller;
 
 
 import java.util.List;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gowaiterless.api.Menu;
-import com.gowaiterless.api.SubMenu;
-import com.gowaiterless.api.service.MenuService;
+import com.gowaiterless.api.menuList.Menu;
+import com.gowaiterless.api.menuList.SubMenu;
+import com.gowaiterless.api.menuList.service.MenuService;
 
 
 @RestController

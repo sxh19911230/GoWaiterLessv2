@@ -1,4 +1,4 @@
-package com.gowaiterless.api.controller;
+package com.gowaiterless.api.menuList.controller;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gowaiterless.api.SubMenu;
-import com.gowaiterless.api.service.SubMenuService;
+import com.gowaiterless.api.menuList.SubMenu;
+import com.gowaiterless.api.menuList.service.SubMenuService;
 
 @RestController
 @RequestMapping("restaurant/{restaurantId}/")

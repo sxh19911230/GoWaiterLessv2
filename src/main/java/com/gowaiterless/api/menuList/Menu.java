@@ -1,4 +1,4 @@
-package com.gowaiterless.api;
+package com.gowaiterless.api.menuList;
 
 import java.util.Collection;
 

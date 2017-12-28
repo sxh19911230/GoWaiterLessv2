@@ -1,4 +1,4 @@
-package com.gowaiterless.api.controller;
+package com.gowaiterless.api.menuList.controller;
 
 import java.security.Principal;
 
