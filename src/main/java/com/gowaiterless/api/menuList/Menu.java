@@ -8,12 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Menu {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long menuId;
 	private String menuCode;
 	private String dishName;

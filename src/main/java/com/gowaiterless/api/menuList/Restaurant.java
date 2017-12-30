@@ -1,5 +1,6 @@
 package com.gowaiterless.api.menuList;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;

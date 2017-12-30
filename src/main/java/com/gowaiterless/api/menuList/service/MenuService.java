@@ -10,6 +10,7 @@ import com.gowaiterless.api.menuList.Menu;
 import com.gowaiterless.api.menuList.Restaurant;
 import com.gowaiterless.api.menuList.SubMenu;
 import com.gowaiterless.api.menuList.repository.MenuRepository;
+import com.gowaiterless.api.menuList.repository.MenuSequencesRepository;
 import com.gowaiterless.api.menuList.repository.RestaurantRepository;
 import com.gowaiterless.api.menuList.repository.SubMenuRepository;
 import com.gowaiterless.exception.ResourceNotFoundException;
@@ -23,6 +24,8 @@ public class MenuService {
 	RestaurantRepository restaurantRepository;
 	@Autowired
 	SubMenuRepository subMenuRepository;
+	@Autowired
+	MenuSequencesRepository menuSequencesRepository;
 	
 	public List<Menu> getMenus(String resId) {
 		return menuRepository.findByRestaurantId(resId).orElseThrow(()->new ResourceNotFoundException());
