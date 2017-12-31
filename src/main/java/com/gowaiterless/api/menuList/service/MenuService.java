@@ -34,16 +34,16 @@ public class MenuService {
 	}
 	
 	public Menu getMenu(String restaurantId, long id) {
-		getRestaurant(restaurantId);
-		return menuRepository.findOne(new MenuId(restaurantId, id));
+		Restaurant r = getRestaurant(restaurantId);
+		return menuRepository.findOne(new MenuId(r, id));
 	}
 	
 	public Menu addMenu(String restaurantId, Menu m) {
 		Restaurant r = getRestaurant(restaurantId);
-		m.setRestaurant(r);
+		m.getMenuId().setRestaurant(r);
 		MenuSequences next = menuSequencesRepository.getOne(restaurantId+"_menu");
 		
-		m.setMenuId(new MenuId(restaurantId,next.getCount()));
+		m.setMenuId(new MenuId(r,next.getCount()));
 		next.setCount(next.getCount()+1);
 		
 		menuSequencesRepository.saveAndFlush(next);
@@ -54,16 +54,16 @@ public class MenuService {
 	public Menu updateMenu(String restaurantId, long menuId, Menu m) {
 		Restaurant r = getRestaurant(restaurantId);
 		getMenu(restaurantId, menuId);
-		m.setRestaurant(r);
-		m.setMenuId(new MenuId(restaurantId, menuId));
+		m.getMenuId().setRestaurant(r);
+		m.setMenuId(new MenuId(r, menuId));
 		menuRepository.saveAndFlush(m);
 		return m;
 	}
 	
 	public void deleteMenu(String restaurantId, long menuId) {
-		getRestaurant(restaurantId);
+		Restaurant r = getRestaurant(restaurantId);
 		getMenu(restaurantId, menuId);
-		menuRepository.delete(new MenuId(restaurantId, menuId));
+		menuRepository.delete(new MenuId(r, menuId));
 	}
 
 	public void addSubMenu(String restaurantId, long menuId, long subMenuId) {

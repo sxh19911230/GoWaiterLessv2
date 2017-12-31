@@ -5,18 +5,13 @@ import java.util.Collection;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Menu {
 	@EmbeddedId
 	private MenuId menuId;
-	
-	@JsonIgnore
-	@ManyToOne
-	private Restaurant restaurant;
-	
+
 	@JsonIgnore
 	@ManyToMany
 	private Collection<SubMenu> subMenus;
@@ -28,7 +23,7 @@ public class Menu {
 	private int basePriceInCent;
 	private boolean active;
 	
-	public Menu(){}
+	public Menu(){menuId = new MenuId();}
 	public Menu(MenuId id) {menuId=id;}
 	
 	public Collection<SubMenu> getSubMenus() {
@@ -66,13 +61,6 @@ public class Menu {
 	}
 	public void setBasePriceInCent(int basePriceInCent) {
 		this.basePriceInCent = basePriceInCent;
-	}
-
-	public Restaurant getRestaurant() {
-		return restaurant;
-	}
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
 	}
 
 	public boolean isActive() {

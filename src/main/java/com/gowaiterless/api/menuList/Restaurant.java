@@ -20,7 +20,7 @@ public class Restaurant {
 	private String email;
 	
 	@JsonIgnore
-	@OneToMany (mappedBy="restaurant")
+	@OneToMany (mappedBy="menuId.restaurant")
 	private Collection<Menu> menus;
 	
 	@JsonIgnore
