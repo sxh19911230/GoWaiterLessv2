@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.gowaiterless.api.menuList.SubMenu;
+import com.gowaiterless.api.menuList.SubMenuId;
 
 
-public interface SubMenuRepository extends JpaRepository<SubMenu, Long>{
-	public List<SubMenu> findByMenusMenuId(long menuId);
-	public List<SubMenu> findByRestaurantId(String restaurantId);
+public interface SubMenuRepository extends JpaRepository<SubMenu, SubMenuId>{
+	public List<SubMenu> findByMenusMenuId(SubMenuId menuId);
+	public List<SubMenu> findBySubMenuIdRestaurantId(String restaurantId);
 }

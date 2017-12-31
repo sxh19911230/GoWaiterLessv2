@@ -2,6 +2,7 @@ package com.gowaiterless.api.menuList;
 
 import java.util.Collection;
 import javax.persistence.ElementCollection;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,9 +14,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class SubMenu {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long subMenuId;
+	@EmbeddedId
+	private SubMenuId subMenuId;
 	private String subMenuName;
 	private String subMenuDescription;
 	private boolean inclusive;
@@ -27,23 +27,11 @@ public class SubMenu {
 	@JsonIgnore
 	@ManyToMany(mappedBy="subMenus")
 	private Collection<Menu> menus;
+	
+	public SubMenu(){subMenuId = new SubMenuId();}
+	public SubMenu(SubMenuId id){subMenuId=id;}
 
 	
-	@JsonIgnore
-	@ManyToOne
-	private Restaurant restaurant;
-	
-	public SubMenu(){}
-	public SubMenu(long id){subMenuId=id;}
-
-	
-	public Restaurant getRestaurant() {
-		return restaurant;
-	}
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
-		//this.restaurantId=123;
-	}
 	public Collection<Menu> getMenus() {
 		return menus;
 	}
@@ -51,10 +39,10 @@ public class SubMenu {
 		this.menus = menus;
 	}
 	
-	public long getSubMenuId() {
+	public SubMenuId getSubMenuId() {
 		return subMenuId;
 	}
-	public void setSubMenuId(long subMenuId) {
+	public void setSubMenuId(SubMenuId subMenuId) {
 		this.subMenuId = subMenuId;
 	}
 

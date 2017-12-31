@@ -11,6 +11,7 @@ import com.gowaiterless.api.menuList.MenuId;
 import com.gowaiterless.api.menuList.MenuSequences;
 import com.gowaiterless.api.menuList.Restaurant;
 import com.gowaiterless.api.menuList.SubMenu;
+import com.gowaiterless.api.menuList.SubMenuId;
 import com.gowaiterless.api.menuList.repository.MenuRepository;
 import com.gowaiterless.api.menuList.repository.MenuSequencesRepository;
 import com.gowaiterless.api.menuList.repository.RestaurantRepository;
@@ -42,8 +43,8 @@ public class MenuService {
 		Restaurant r = getRestaurant(restaurantId);
 		m.getMenuId().setRestaurant(r);
 		MenuSequences next = menuSequencesRepository.getOne(restaurantId+"_menu");
+		m.getMenuId().setMenuId(next.getCount());
 		
-		m.setMenuId(new MenuId(r,next.getCount()));
 		next.setCount(next.getCount()+1);
 		
 		menuSequencesRepository.saveAndFlush(next);
@@ -68,13 +69,13 @@ public class MenuService {
 
 	public void addSubMenu(String restaurantId, long menuId, long subMenuId) {
 		Menu m = getMenu(restaurantId, menuId);
-		m.getSubMenus().add(getSubMenu(subMenuId));
+		m.getSubMenus().add(getSubMenu(restaurantId,subMenuId));
 		menuRepository.saveAndFlush(m);
 	}
 	
 	public void deleteSubMenu(String restaurantId, long menuId, long subMenuId) {
 		Menu m = getMenu(restaurantId, menuId);
-		m.getSubMenus().removeIf(s->s.getSubMenuId()==subMenuId);
+		m.getSubMenus().removeIf(s->s.getSubMenuId().getSubMenuId()==subMenuId&&s.getSubMenuId().getRestaurant().getId()==restaurantId);
 		menuRepository.saveAndFlush(m);
 	}
 	
@@ -86,8 +87,8 @@ public class MenuService {
 	}
 	
 	
-	private SubMenu getSubMenu(long subMenuId) {
-		SubMenu s = subMenuRepository.findOne(subMenuId);
+	private SubMenu getSubMenu(String restaurantId, long subMenuId) {
+		SubMenu s = subMenuRepository.findOne(new SubMenuId(getRestaurant(restaurantId),subMenuId));
 		if (s == null) throw new ResourceNotFoundException("SubMenu Not Found");
 		return s;
 	}

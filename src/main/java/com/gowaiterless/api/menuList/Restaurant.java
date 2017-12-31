@@ -24,7 +24,7 @@ public class Restaurant {
 	private Collection<Menu> menus;
 	
 	@JsonIgnore
-	@OneToMany (mappedBy="restaurant")
+	@OneToMany (mappedBy="subMenuId.restaurant")
 	private Collection<SubMenu> subMenus;
 	
 	public Restaurant() {}
