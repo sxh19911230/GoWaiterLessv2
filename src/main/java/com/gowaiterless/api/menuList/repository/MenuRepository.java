@@ -6,7 +6,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.gowaiterless.api.menuList.Menu;
+import com.gowaiterless.api.menuList.MenuId;
 
-public interface MenuRepository extends JpaRepository<Menu, Long> {
-	public Optional<List<Menu>> findByRestaurantId(String id);
+public interface MenuRepository extends JpaRepository<Menu, MenuId> {
+	//public Optional<List<Menu>> findByRestaurantId(String id);
 }

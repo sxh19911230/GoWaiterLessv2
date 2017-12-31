@@ -34,7 +34,6 @@ public class MenuController {
 	}
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Menu> addMenu(@RequestBody Menu m, @PathVariable String restaurantId) {
-		m.setMenuId(0);
 		return ResponseEntity.status(HttpStatus.CREATED).body(menuService.addMenu(restaurantId, m));
 	}
 	@RequestMapping(value="/{menuId}", method=RequestMethod.PUT)
@@ -47,14 +46,14 @@ public class MenuController {
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 	@RequestMapping(value="/{menuId}/submenu",method=RequestMethod.POST)
-	public ResponseEntity<?> addSubMenu(@PathVariable long menuId, @RequestBody SubMenu subMenu) {
-		menuService.addSubMenu(menuId,subMenu.getSubMenuId());
+	public ResponseEntity<?> addSubMenu(@PathVariable String restaurantId, @PathVariable long menuId, @RequestBody SubMenu subMenu) {
+		menuService.addSubMenu(restaurantId,menuId,subMenu.getSubMenuId());
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 	
 	@RequestMapping(value="/{menuId}/submenu",method=RequestMethod.DELETE)
-	public ResponseEntity<?> deleteSubMenu(@PathVariable long menuId, @RequestBody SubMenu subMenu) {
-		menuService.deleteSubMenu(menuId,subMenu.getSubMenuId());
+	public ResponseEntity<?> deleteSubMenu(@PathVariable String restaurantId, @PathVariable long menuId, @RequestBody SubMenu subMenu) {
+		menuService.deleteSubMenu(restaurantId, menuId,subMenu.getSubMenuId());
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 }

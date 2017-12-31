@@ -1,25 +1,18 @@
 package com.gowaiterless.api.menuList;
 
-import java.io.Serializable;
 import java.util.Collection;
-import java.util.Objects;
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.TableGenerator;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class SubMenu implements Serializable {
+public class SubMenu {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long subMenuId;

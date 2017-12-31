@@ -12,6 +12,8 @@ public class MenuSequences {
 	private String menuId;
 	private int count;
 	
+	public MenuSequences(){}
+	
 	public MenuSequences(String id, int i) {
 		menuId= id;
 		count = i;

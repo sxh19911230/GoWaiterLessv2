@@ -2,36 +2,34 @@ package com.gowaiterless.api.menuList;
 
 import java.util.Collection;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Menu {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long menuId;
+	@EmbeddedId
+	private MenuId menuId;
+	
+	@JsonIgnore
+	@ManyToOne
+	private Restaurant restaurant;
+	
+	@JsonIgnore
+	@ManyToMany
+	private Collection<SubMenu> subMenus;
+	
 	private String menuCode;
 	private String dishName;
 	private String dishDescription;
 	private String picture;
 	private int basePriceInCent;
-	@JsonIgnore
-	@ManyToOne
-	private Restaurant restaurant;
-	@JsonIgnore
-	@ManyToMany
-	private Collection<SubMenu> subMenus;
 	private boolean active;
 	
 	public Menu(){}
-	public Menu(long id) {menuId=id;}
+	public Menu(MenuId id) {menuId=id;}
 	
 	public Collection<SubMenu> getSubMenus() {
 		return subMenus;
@@ -39,10 +37,10 @@ public class Menu {
 	public void setSubMenus(Collection<SubMenu> submenus) {
 		this.subMenus = submenus;
 	}
-	public long getMenuId() {
+	public MenuId getMenuId() {
 		return menuId;
 	}
-	public void setMenuId(long menuId) {
+	public void setMenuId(MenuId menuId) {
 		this.menuId = menuId;
 	}
 	public String getDishName() {

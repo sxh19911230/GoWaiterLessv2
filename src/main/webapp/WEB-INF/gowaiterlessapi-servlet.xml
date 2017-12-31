@@ -58,7 +58,5 @@
         
         <aop:aspectj-autoproxy />
 		
-		<bean name="logginAspect" class="com.gowaiterless.api.aspect.logginAspect" />
-	
 </beans>
 

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gowaiterless.api.menuList.Menu;
+import com.gowaiterless.api.menuList.MenuId;
+import com.gowaiterless.api.menuList.MenuSequences;
 import com.gowaiterless.api.menuList.Restaurant;
 import com.gowaiterless.api.menuList.SubMenu;
 import com.gowaiterless.api.menuList.repository.MenuRepository;
@@ -28,44 +30,50 @@ public class MenuService {
 	MenuSequencesRepository menuSequencesRepository;
 	
 	public List<Menu> getMenus(String resId) {
-		return menuRepository.findByRestaurantId(resId).orElseThrow(()->new ResourceNotFoundException());
+		return null;//menuRepository.findByRestaurantId(resId).orElseThrow(()->new ResourceNotFoundException());
 	}
 	
 	public Menu getMenu(String restaurantId, long id) {
 		getRestaurant(restaurantId);
-		return menuRepository.findOne(id);
+		return menuRepository.findOne(new MenuId(restaurantId, id));
 	}
 	
 	public Menu addMenu(String restaurantId, Menu m) {
-		getRestaurant(restaurantId);
-		m.setRestaurant(new Restaurant(restaurantId));
+		Restaurant r = getRestaurant(restaurantId);
+		m.setRestaurant(r);
+		MenuSequences next = menuSequencesRepository.getOne(restaurantId+"_menu");
+		
+		m.setMenuId(new MenuId(restaurantId,next.getCount()));
+		next.setCount(next.getCount()+1);
+		
+		menuSequencesRepository.saveAndFlush(next);
 		menuRepository.saveAndFlush(m);
 		return m;
 	}
 	
 	public Menu updateMenu(String restaurantId, long menuId, Menu m) {
-		getRestaurant(restaurantId);
-		getMenu(menuId);
-		m.setRestaurant(new Restaurant(restaurantId));
-		m.setMenuId(menuId);
+		Restaurant r = getRestaurant(restaurantId);
+		getMenu(restaurantId, menuId);
+		m.setRestaurant(r);
+		m.setMenuId(new MenuId(restaurantId, menuId));
 		menuRepository.saveAndFlush(m);
 		return m;
 	}
 	
 	public void deleteMenu(String restaurantId, long menuId) {
 		getRestaurant(restaurantId);
-		getMenu(menuId);
-		menuRepository.delete(menuId);
+		getMenu(restaurantId, menuId);
+		menuRepository.delete(new MenuId(restaurantId, menuId));
 	}
 
-	public void addSubMenu(long menuId, long subMenuId) {
-		Menu m = getMenu(menuId);
+	public void addSubMenu(String restaurantId, long menuId, long subMenuId) {
+		Menu m = getMenu(restaurantId, menuId);
 		m.getSubMenus().add(getSubMenu(subMenuId));
 		menuRepository.saveAndFlush(m);
 	}
 	
-	public void deleteSubMenu(long menuId, long subMenuId) {
-		Menu m = getMenu(menuId);
+	public void deleteSubMenu(String restaurantId, long menuId, long subMenuId) {
+		Menu m = getMenu(restaurantId, menuId);
 		m.getSubMenus().removeIf(s->s.getSubMenuId()==subMenuId);
 		menuRepository.saveAndFlush(m);
 	}
@@ -76,11 +84,7 @@ public class MenuService {
 		return r;
 		
 	}
-	private Menu getMenu(long menuId) {
-		Menu m = menuRepository.findOne(menuId);
-		if (m == null) throw new ResourceNotFoundException("Menu Not Found");
-		return m;
-	}
+	
 	
 	private SubMenu getSubMenu(long subMenuId) {
 		SubMenu s = subMenuRepository.findOne(subMenuId);
