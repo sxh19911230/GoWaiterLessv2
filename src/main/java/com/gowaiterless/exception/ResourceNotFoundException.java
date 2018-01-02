@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import org.springframework.http.HttpStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
+@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="unable to find item")
 public class ResourceNotFoundException extends RuntimeException {
 	
 	/**
@@ -17,7 +17,5 @@ public class ResourceNotFoundException extends RuntimeException {
 	public ResourceNotFoundException(String string) {
 		super(string);
 	}
-
-
 
 }

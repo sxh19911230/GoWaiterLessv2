@@ -47,13 +47,13 @@ public class MenuController {
 	}
 	@RequestMapping(value="/{menuId}/submenu",method=RequestMethod.POST)
 	public ResponseEntity<?> addSubMenu(@PathVariable String restaurantId, @PathVariable long menuId, @RequestBody SubMenu subMenu) {
-		menuService.addSubMenu(restaurantId,menuId,subMenu.getSubMenuId().getSubMenuId());
+		menuService.addSubMenu(restaurantId,menuId,subMenu.getSubMenuId().getSubMenuNum());
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 	
 	@RequestMapping(value="/{menuId}/submenu",method=RequestMethod.DELETE)
 	public ResponseEntity<?> deleteSubMenu(@PathVariable String restaurantId, @PathVariable long menuId, @RequestBody SubMenu subMenu) {
-		menuService.deleteSubMenu(restaurantId, menuId,subMenu.getSubMenuId().getSubMenuId());
+		menuService.deleteSubMenu(restaurantId, menuId,subMenu.getSubMenuId().getSubMenuNum());
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 }

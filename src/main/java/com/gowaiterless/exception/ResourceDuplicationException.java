@@ -3,7 +3,7 @@ package com.gowaiterless.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.CONFLICT)
+@ResponseStatus(value=HttpStatus.CONFLICT,reason="Object conflits")
 public class ResourceDuplicationException extends RuntimeException {
 
 

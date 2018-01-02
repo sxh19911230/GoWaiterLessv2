@@ -2,12 +2,18 @@ package com.gowaiterless.api.menuList;
 
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"restaurant_id" , "menuCode"})})
 public class Menu {
 	@EmbeddedId
 	private MenuId menuId;
@@ -16,12 +22,14 @@ public class Menu {
 	@ManyToMany
 	private Collection<SubMenu> subMenus;
 	
+	@Column(length=10)
 	private String menuCode;
+	@Column(nullable=false)
 	private String dishName;
 	private String dishDescription;
 	private String picture;
 	private int basePriceInCent;
-	private boolean active;
+	private boolean active = true;
 	
 	public Menu(){menuId = new MenuId();}
 	public Menu(MenuId id) {menuId=id;}

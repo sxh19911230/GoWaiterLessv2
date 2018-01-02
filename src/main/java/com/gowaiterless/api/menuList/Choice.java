@@ -1,9 +1,11 @@
 package com.gowaiterless.api.menuList;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class Choice {
+	@Column(nullable = false)
 	private String choiceCode;
 	private String choiceName;
 	private String choiceDiscription;

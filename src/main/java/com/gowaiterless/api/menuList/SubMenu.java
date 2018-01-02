@@ -1,15 +1,15 @@
 package com.gowaiterless.api.menuList;
 
 import java.util.Collection;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.UniqueConstraint;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -22,6 +22,7 @@ public class SubMenu {
 	private int allowed;
 	private int free;
 	@ElementCollection (fetch=FetchType.EAGER)
+	@CollectionTable( uniqueConstraints = {@UniqueConstraint(columnNames={"SubMenu_restaurant_id","choiceCode"})})
 	private Collection<Choice> choices;
 	
 	@JsonIgnore
@@ -71,10 +72,10 @@ public class SubMenu {
 	public void setFree(int free) {
 		this.free = free;
 	}
-	public Collection<Choice> getItems() {
+	public Collection<Choice> getChoices() {
 		return choices;
 	}
-	public void setItems(Collection<Choice> choices) {
+	public void setChoices(Collection<Choice> choices) {
 		this.choices = choices;
 	}
 	public String getSubMenuDescription() {

@@ -11,9 +11,6 @@ public class Address {
 	String state;
 	String zip;
 	String country;
-	double latitude;
-	double longitude;
-	String genre;
 	TimeZone timeZone;
 	public String getStreetAddress() {
 		return streetAddress;
@@ -45,24 +42,7 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public double getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-	public double getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-	public String getGenre() {
-		return genre;
-	}
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
+
 	public TimeZone getTimeZone() {
 		return timeZone;
 	}

@@ -10,13 +10,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Embeddable
 public class MenuId implements Serializable{
 
+	
+
 	private static final long serialVersionUID = 1L;
 	
 	@JsonIgnore
 	@ManyToOne
 	private Restaurant restaurant;
 	
-	private long menuId;
+	private long menuNum;
 
 	
 	public MenuId(){}
@@ -24,7 +26,7 @@ public class MenuId implements Serializable{
 	public MenuId(Restaurant restaurant, long menuIntId) {
 		super();
 		this.restaurant = restaurant;
-		this.menuId = menuIntId;
+		this.menuNum = menuIntId;
 	}
 	
 	public Restaurant getRestaurant() {
@@ -35,14 +37,39 @@ public class MenuId implements Serializable{
 		this.restaurant = restaurant;
 	}
 
-	public long getMenuId() {
-		return menuId;
+	public long getMenuNum() {
+		return menuNum;
 	}
 
-	public void setMenuId(long menuId) {
-		this.menuId = menuId;
+	public void setMenuNum(long menuId) {
+		this.menuNum = menuId;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (menuNum ^ (menuNum >>> 32));
+		result = prime * result + ((restaurant == null) ? 0 : restaurant.hashCode());
+		return result;
 	}
 
-
-
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MenuId other = (MenuId) obj;
+		if (menuNum != other.menuNum)
+			return false;
+		if (restaurant == null) {
+			if (other.restaurant != null)
+				return false;
+		} else if (!restaurant.equals(other.restaurant))
+			return false;
+		return true;
+	}
 }
