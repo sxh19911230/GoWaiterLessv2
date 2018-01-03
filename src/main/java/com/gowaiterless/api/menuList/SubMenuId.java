@@ -10,29 +10,31 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Embeddable
 public class SubMenuId implements Serializable{
 
+	
+
 	private static final long serialVersionUID = 1L;
 	
 	@JsonIgnore
 	@ManyToOne
-	private Restaurant restaurant;
+	private MenuBook menuBook;
 	
 	private long subMenuNum;
 
 	
 	public SubMenuId(){}
 	
-	public SubMenuId(Restaurant restaurant, long subMenuId) {
+	public SubMenuId(MenuBook menuBook, long subMenuId) {
 		super();
-		this.restaurant = restaurant;
+		this.menuBook = menuBook;
 		this.subMenuNum = subMenuId;
 	}
 	
-	public Restaurant getRestaurant() {
-		return restaurant;
+	public MenuBook getMenuBook() {
+		return menuBook;
 	}
 
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
+	public void setMenuBook(MenuBook menuBook) {
+		this.menuBook = menuBook;
 	}
 
 	public long getSubMenuNum() {
@@ -47,7 +49,7 @@ public class SubMenuId implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((restaurant == null) ? 0 : restaurant.hashCode());
+		result = prime * result + ((menuBook == null) ? 0 : menuBook.hashCode());
 		result = prime * result + (int) (subMenuNum ^ (subMenuNum >>> 32));
 		return result;
 	}
@@ -61,14 +63,15 @@ public class SubMenuId implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		SubMenuId other = (SubMenuId) obj;
-		if (restaurant == null) {
-			if (other.restaurant != null)
+		if (menuBook == null) {
+			if (other.menuBook != null)
 				return false;
-		} else if (!restaurant.equals(other.restaurant))
+		} else if (!menuBook.equals(other.menuBook))
 			return false;
 		if (subMenuNum != other.subMenuNum)
 			return false;
 		return true;
 	}
 
+	
 }

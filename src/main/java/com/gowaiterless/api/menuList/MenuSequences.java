@@ -10,13 +10,13 @@ public class MenuSequences {
 
 	@Id
 	private String menuId;
-	private int count;
+	private int next;
 	
 	public MenuSequences(){}
 	
 	public MenuSequences(String id, int i) {
 		menuId= id;
-		count = i;
+		next = i;
 	}
 	
 	public String getMenuId() {
@@ -27,12 +27,12 @@ public class MenuSequences {
 		this.menuId = menuId;
 	}
 
-	public int getCount() {
-		return count;
+	public int getNext() {
+		return next;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setNext(int next) {
+		this.next = next;
 	}
 	
 	

@@ -22,7 +22,7 @@ public class SubMenu {
 	private int allowed;
 	private int free;
 	@ElementCollection (fetch=FetchType.EAGER)
-	@CollectionTable( uniqueConstraints = {@UniqueConstraint(columnNames={"SubMenu_restaurant_id","choiceCode"})})
+	@CollectionTable( uniqueConstraints = {@UniqueConstraint(columnNames={"SubMenu_menuBook_id","choiceCode"})})
 	private Collection<Choice> choices;
 	
 	@JsonIgnore

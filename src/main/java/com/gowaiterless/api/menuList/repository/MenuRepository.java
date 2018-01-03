@@ -9,6 +9,6 @@ import com.gowaiterless.api.menuList.Menu;
 import com.gowaiterless.api.menuList.MenuId;
 
 public interface MenuRepository extends JpaRepository<Menu, MenuId> {
-	public Optional<List<Menu>> findByMenuIdRestaurantId(String id);
-	public Menu findByMenuIdRestaurantIdAndMenuCode(String id, String menuCode);
+	public Optional<List<Menu>> findByMenuIdMenuBookId(long menubookid);
+	public Menu findByMenuIdMenuBookIdAndMenuCode(long menubookid, String menuCode);
 }

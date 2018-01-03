@@ -10,6 +10,6 @@ import com.gowaiterless.api.menuList.Menu;
 public class Item {
 	private Menu nemu;
 	private Collection<String> ChoiceList;
-	
-
+	private String specialInstruction;
+	int quantity;
 }

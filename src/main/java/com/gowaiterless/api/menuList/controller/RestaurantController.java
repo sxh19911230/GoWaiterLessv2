@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gowaiterless.api.menuList.MenuBook;
 import com.gowaiterless.api.menuList.Restaurant;
 import com.gowaiterless.api.menuList.service.RestaurantService;
 
@@ -43,5 +44,15 @@ public class RestaurantController {
 	public ResponseEntity<?> deleteRestaurant(@PathVariable String id) {
 		restaurantService.deleteRestaurant(id);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+	}
+	
+	@RequestMapping(value="/{id}/menubook",method=RequestMethod.POST)
+	public Restaurant addMenuBook(@PathVariable String id, @RequestBody MenuBook menuBook) {
+		return restaurantService.addMenuBook(id, menuBook);
+	}
+	
+	@RequestMapping(value="/{id}/menuook",method=RequestMethod.DELETE)
+	public Restaurant deleteMenuBook(@PathVariable String id) {
+		return restaurantService.deleteMenuBook(id);
 	}
 }

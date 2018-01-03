@@ -8,8 +8,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gowaiterless.api.menuList.MenuSequences;
+import com.gowaiterless.api.menuList.MenuBook;
 import com.gowaiterless.api.menuList.Restaurant;
+import com.gowaiterless.api.menuList.repository.MenuBookRepository;
 import com.gowaiterless.api.menuList.repository.MenuSequencesRepository;
 import com.gowaiterless.api.menuList.repository.RestaurantRepository;
 import com.gowaiterless.exception.ResourceDuplicationException;
@@ -23,6 +24,9 @@ public class RestaurantService {
 	RestaurantRepository restaurantReprository;
 	@Autowired
 	MenuSequencesRepository menuSequencesRepository;
+	@Autowired
+	MenuBookRepository menuBookRepository;
+	
 
 	public List<Restaurant> getRestaurants() {
 		List<Restaurant> r = new ArrayList<Restaurant>();
@@ -37,8 +41,7 @@ public class RestaurantService {
 	public Restaurant addRestaurant(Restaurant r) {
 		Restaurant t = restaurantReprository.findOne(r.getId());
 		if (t != null) throw new ResourceDuplicationException();
-		menuSequencesRepository.saveAndFlush(new MenuSequences(r.getId()+"_menu",1));
-		menuSequencesRepository.saveAndFlush(new MenuSequences(r.getId()+"_submenu",1));
+
 		restaurantReprository.saveAndFlush(r);
 		return r;
 	}
@@ -51,8 +54,19 @@ public class RestaurantService {
 	public void deleteRestaurant(String id) {
 		getRestaurant(id);
 		restaurantReprository.delete(id);
-		menuSequencesRepository.delete(id+"_menu");
-		menuSequencesRepository.delete(id+"_submenu");
+
+	}
+	public Restaurant addMenuBook(String id, MenuBook menuBook) {
+		Restaurant r = getRestaurant(id);
+		r.setMenuBook(menuBookRepository.getOne(menuBook.getId()));
+		restaurantReprository.saveAndFlush(r);
+		return r;
+	}
+	public Restaurant deleteMenuBook(String id) {
+		Restaurant r = getRestaurant(id);
+		r.setMenuBook(null);
+		restaurantReprository.saveAndFlush(r);
+		return r;
 	}
 	
 	

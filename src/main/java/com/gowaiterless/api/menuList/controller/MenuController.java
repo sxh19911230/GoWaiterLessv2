@@ -18,42 +18,42 @@ import com.gowaiterless.api.menuList.service.MenuService;
 
 
 @RestController
-@RequestMapping("restaurant/{restaurantId}/menu")
+@RequestMapping("menubook/{menubookid}/menu")
 public class MenuController {
 	@Autowired
 	MenuService menuService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Menu> getMenus(@PathVariable String restaurantId) {
-		return menuService.getMenus(restaurantId);
+	public List<Menu> getMenus(@PathVariable long menubookid) {
+		return menuService.getMenus(menubookid);
 	}
 	
 	@RequestMapping(value="/{menuId}", method=RequestMethod.GET) 
-	public Menu getMenu(@PathVariable String restaurantId, @PathVariable long menuId){
-		return menuService.getMenu(restaurantId, menuId);
+	public Menu getMenu(@PathVariable long menubookid, @PathVariable long menuId){
+		return menuService.getMenu(menubookid, menuId);
 	}
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Menu> addMenu(@RequestBody Menu m, @PathVariable String restaurantId) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(menuService.addMenu(restaurantId, m));
+	public ResponseEntity<Menu> addMenu(@RequestBody Menu m, @PathVariable long menubookid) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(menuService.addMenu(menubookid, m));
 	}
 	@RequestMapping(value="/{menuId}", method=RequestMethod.PUT)
-	public Menu updateMenu(@RequestBody Menu m, @PathVariable String restaurantId, @PathVariable long menuId) {
-		return menuService.updateMenu(restaurantId, menuId, m);
+	public Menu updateMenu(@RequestBody Menu m, @PathVariable long menubookid, @PathVariable long menuId) {
+		return menuService.updateMenu(menubookid, menuId, m);
 	}
 	@RequestMapping(value="/{menuId}", method=RequestMethod.DELETE)
-	public ResponseEntity<?> deleteMenu(@PathVariable String restaurantId, @PathVariable long menuId) {
-		menuService.deleteMenu(restaurantId, menuId);
+	public ResponseEntity<?> deleteMenu(@PathVariable long menubookid, @PathVariable long menuId) {
+		menuService.deleteMenu(menubookid, menuId);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 	@RequestMapping(value="/{menuId}/submenu",method=RequestMethod.POST)
-	public ResponseEntity<?> addSubMenu(@PathVariable String restaurantId, @PathVariable long menuId, @RequestBody SubMenu subMenu) {
-		menuService.addSubMenu(restaurantId,menuId,subMenu.getSubMenuId().getSubMenuNum());
+	public ResponseEntity<?> addSubMenu(@PathVariable long menubookid, @PathVariable long menuId, @RequestBody SubMenu subMenu) {
+		menuService.addSubMenu(menubookid,menuId,subMenu.getSubMenuId().getSubMenuNum());
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 	
 	@RequestMapping(value="/{menuId}/submenu",method=RequestMethod.DELETE)
-	public ResponseEntity<?> deleteSubMenu(@PathVariable String restaurantId, @PathVariable long menuId, @RequestBody SubMenu subMenu) {
-		menuService.deleteSubMenu(restaurantId, menuId,subMenu.getSubMenuId().getSubMenuNum());
+	public ResponseEntity<?> deleteSubMenu(@PathVariable long menubookid, @PathVariable long menuId, @RequestBody SubMenu subMenu) {
+		menuService.deleteSubMenu(menubookid, menuId,subMenu.getSubMenuId().getSubMenuNum());
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 }
