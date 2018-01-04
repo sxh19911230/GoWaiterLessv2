@@ -51,7 +51,7 @@ public class RestaurantController {
 		return restaurantService.addMenuBook(id, menuBook);
 	}
 	
-	@RequestMapping(value="/{id}/menuook",method=RequestMethod.DELETE)
+	@RequestMapping(value="/{id}/menubook",method=RequestMethod.DELETE)
 	public Restaurant deleteMenuBook(@PathVariable String id) {
 		return restaurantService.deleteMenuBook(id);
 	}
