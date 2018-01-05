@@ -29,10 +29,7 @@ public class MenuBook {
 	@OneToMany (mappedBy="subMenuId.menuBook")
 	private Collection<SubMenu> subMenus;
 	
-	@JsonIgnore
-	@OneToMany (mappedBy="menuBook")
-	private Collection<Restaurant> restaurants;
-	
+
 	/* TODO
 	the view, design, structure of the menu.
 	how it looks
@@ -44,12 +41,6 @@ public class MenuBook {
 	}
 	public void setId(long menuBookId) {
 		this.id = menuBookId;
-	}
-	public Collection<Restaurant> getRestaurants() {
-		return restaurants;
-	}
-	public void setRestaurants(Collection<Restaurant> restaurants) {
-		this.restaurants = restaurants;
 	}
 	
 	public Collection<Menu> getMenus() {

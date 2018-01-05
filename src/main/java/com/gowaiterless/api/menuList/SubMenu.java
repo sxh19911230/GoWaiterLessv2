@@ -24,21 +24,22 @@ public class SubMenu {
 	@ElementCollection (fetch=FetchType.EAGER)
 	@CollectionTable( uniqueConstraints = {@UniqueConstraint(columnNames={"SubMenu_menuBook_id","choiceCode"})})
 	private Collection<Choice> choices;
-	
+	/*
 	@JsonIgnore
 	@ManyToMany(mappedBy="subMenus")
 	private Collection<Menu> menus;
-	
+	*/
 	public SubMenu(){subMenuId = new SubMenuId();}
 	public SubMenu(SubMenuId id){subMenuId=id;}
 
-	
+	/*
 	public Collection<Menu> getMenus() {
 		return menus;
 	}
 	public void setMenus(Collection<Menu> menus) {
 		this.menus = menus;
 	}
+	*/
 	
 	public SubMenuId getSubMenuId() {
 		return subMenuId;
@@ -46,7 +47,6 @@ public class SubMenu {
 	public void setSubMenuId(SubMenuId subMenuId) {
 		this.subMenuId = subMenuId;
 	}
-
 
 	public String getSubMenuName() {
 		return subMenuName;

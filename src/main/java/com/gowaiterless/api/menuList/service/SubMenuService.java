@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.gowaiterless.api.menuList.Choice;
 import com.gowaiterless.api.menuList.MenuBook;
+import com.gowaiterless.api.menuList.MenuId;
 import com.gowaiterless.api.menuList.MenuSequences;
 import com.gowaiterless.api.menuList.SubMenu;
 import com.gowaiterless.api.menuList.SubMenuId;
@@ -28,8 +29,8 @@ public class SubMenuService {
 	@Autowired
 	MenuSequencesRepository menuSequencesRepository;
 	
-	public List<SubMenu> getSubMenus(long menubookid, long subMenuId) {
-		return subMenuRepository.findByMenusMenuId(new SubMenuId(getMenuBook(menubookid), subMenuId)).orElseThrow(()->new ResourceNotFoundException());
+	public List<SubMenu> getSubMenus(long menubookid, long menuId) {
+		return subMenuRepository.findBySubMenuIdMenuBookMenus(new MenuId(getMenuBook(menubookid), menuId)).orElseThrow(()->new ResourceNotFoundException());
 	}
 
 	public SubMenu addSubMenu(long menubookid, SubMenu s) {
