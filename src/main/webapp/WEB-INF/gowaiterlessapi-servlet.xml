@@ -25,6 +25,7 @@
 	<mvc:annotation-driven />
 	
 	<jpa:repositories base-package="com.gowaiterless.api.menuList.repository" entity-manager-factory-ref="emf"/>
+	<jpa:repositories base-package="com.gowaiterless.api.orderList.repository" entity-manager-factory-ref="emf"/>
 
 	<bean id="emf"
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -48,7 +49,6 @@
         <property name="url" value="jdbc:mysql://localhost:3306/gowaiterless?useUnicode=yes&amp;characterEncoding=UTF-8" />
         <property name="username" value="root" />
         <property name="password" value="" />
-        
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
