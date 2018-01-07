@@ -2,19 +2,33 @@ package com.gowaiterless.api.orderList;
 
 import java.util.Collection;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import com.gowaiterless.api.menuList.Choice;
 import com.gowaiterless.api.menuList.Menu;
 
-@Embeddable
+@Entity
 public class Item {
 	
+	@EmbeddedId
+	private ItemId itemId;
+	
+	@ManyToOne
 	private Menu nemu;
-	private Collection<Choice> ChoiceList;
+	@Embedded
+	private Collection<Choice> choiceList;
 	private String specialInstruction;
 	private int quantity;
 	
+	public ItemId getItemId() {
+		return itemId;
+	}
+	public void setItemId(ItemId itemId) {
+		this.itemId = itemId;
+	}
 	public Menu getNemu() {
 		return nemu;
 	}
@@ -22,10 +36,10 @@ public class Item {
 		this.nemu = nemu;
 	}
 	public Collection<Choice> getChoiceList() {
-		return ChoiceList;
+		return choiceList;
 	}
 	public void setChoiceList(Collection<Choice> choiceList) {
-		ChoiceList = choiceList;
+		this.choiceList = choiceList;
 	}
 	public String getSpecialInstruction() {
 		return specialInstruction;

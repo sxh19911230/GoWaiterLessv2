@@ -3,6 +3,7 @@ package com.gowaiterless.api.orderList;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gowaiterless.api.menuList.Restaurant;
@@ -12,6 +13,7 @@ public class OrderId implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
+	@ManyToOne
 	@JsonIgnoreProperties({"address","restaurantPic","telephone","fax","email","menus","submenus"})
 	private Restaurant restaurant;
 	private long orderNum;
