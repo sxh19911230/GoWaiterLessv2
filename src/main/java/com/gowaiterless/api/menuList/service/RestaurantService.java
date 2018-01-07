@@ -60,11 +60,11 @@ public class RestaurantService {
 		restaurantReprository.delete(id);
 
 	}
-	public Restaurant addMenuBook(String id, MenuBook menuBook) {
+	public Restaurant addMenuBook(String id, long l) {
 		Restaurant r = getRestaurant(id);
-		r.setMenuBook(menuBookRepository.getOne(menuBook.getId()));
-		restaurantReprository.saveAndFlush(r);
-		return r;
+		r.setMenuBook(menuBookRepository.getOne(l));
+
+		return restaurantReprository.saveAndFlush(r);
 	}
 	public Restaurant deleteMenuBook(String id) {
 		Restaurant r = getRestaurant(id);

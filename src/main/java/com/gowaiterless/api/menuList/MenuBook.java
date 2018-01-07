@@ -1,16 +1,21 @@
 package com.gowaiterless.api.menuList;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Proxy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Proxy(lazy = false)
 public class MenuBook {
 	
 	
@@ -22,12 +27,11 @@ public class MenuBook {
 	
 	
 	@JsonIgnore
-	@OneToMany (mappedBy="menuId.menuBook")
-	private Collection<Menu> menus;
-	
+	@OneToMany (mappedBy="menuId.menuBook", fetch=FetchType.LAZY)
+	private Collection<Menu> menus= new ArrayList<Menu>();
 	@JsonIgnore
-	@OneToMany (mappedBy="subMenuId.menuBook")
-	private Collection<SubMenu> subMenus;
+	@OneToMany (mappedBy="subMenuId.menuBook", fetch=FetchType.LAZY)
+	private Collection<SubMenu> subMenus= new ArrayList<SubMenu>();
 	
 
 	/* TODO

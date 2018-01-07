@@ -1,14 +1,15 @@
 package com.gowaiterless.api.menuList;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,9 +19,9 @@ public class Menu {
 	@EmbeddedId
 	private MenuId menuId;
 
-	@JsonIgnore
-	@ManyToMany
-	private Collection<SubMenu> subMenus;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	private Collection<SubMenu> subMenus=new ArrayList<SubMenu>();
 	
 	@Column(length=10)
 	private String menuCode;
