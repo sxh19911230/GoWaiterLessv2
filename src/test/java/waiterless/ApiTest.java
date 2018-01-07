@@ -1,12 +1,15 @@
 package waiterless;
 
 import static com.jayway.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.containsString;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.response.Response;
 
 public class ApiTest {
 
@@ -39,10 +42,46 @@ public class ApiTest {
 
 
     @Test
-    public void testUserFetchesSuccess() {
+    public void testRestaurant() {
     	given().when().get("/v1/restaurant")
         .then()
-        .statusCode(200);
+        .statusCode(200).body(containsString("[]"));
+    
+    	given().when().get("/v1/restaurant/asd3")
+        .then()
+        .statusCode(404);
+    
+    	given().
+    		accept(ContentType.JSON).
+    		contentType(ContentType.JSON).
+    		body("{\"id\":\"asd3\",\"name\":\"asd\",\"address\":{\"streetAddress\":\"12450 asd Road\",\"city\":\"asd\",\"state\":\"CA\",\"zip\":\"12345\"},\"telephone\":\"1234567890\",\"fax\":\"1234567890\",\"email\":\"asdasd@gmail.com\"}")
+    	.when().post("/v1/restaurant").then()
+        .statusCode(201).body(containsString("{\"id\":\"asd3\",\"name\":\"asd\",\"address\":{\"streetAddress\":\"12450 asd Road\",\"city\":\"asd\",\"state\":\"CA\",\"zip\":\"12345\",\"country\":null,\"timeZone\":null},\"restaurantPic\":null,\"telephone\":\"1234567890\",\"fax\":\"1234567890\",\"email\":\"asdasd@gmail.com\",\"menuBook\":null}"));
+
+    
+    	given().when().get("/v1/restaurant")
+        .then()
+        .statusCode(200).body(containsString("[{\"id\":\"asd3\",\"name\":\"asd\",\"address\":{\"streetAddress\":\"12450 asd Road\",\"city\":\"asd\",\"state\":\"CA\",\"zip\":\"12345\",\"country\":null,\"timeZone\":null},\"restaurantPic\":null,\"telephone\":\"1234567890\",\"fax\":\"1234567890\",\"email\":\"asdasd@gmail.com\",\"menuBook\":null}]"));
+    
+    	
+    	given().when().get("/v1/restaurant/asd3")
+        .then()
+        .statusCode(200).body(containsString("{\"id\":\"asd3\",\"name\":\"asd\",\"address\":{\"streetAddress\":\"12450 asd Road\",\"city\":\"asd\",\"state\":\"CA\",\"zip\":\"12345\",\"country\":null,\"timeZone\":null},\"restaurantPic\":null,\"telephone\":\"1234567890\",\"fax\":\"1234567890\",\"email\":\"asdasd@gmail.com\",\"menuBook\":null}"));
+    	
+    	given().when().delete("/v1/restaurant/asd3")
+    	.then()
+    	.statusCode(204);
+    	
+    	given().when().get("/v1/restaurant")
+        .then()
+        .statusCode(200).body(containsString("[]"));
+    
+    	given().when().get("/v1/restaurant/asd3")
+        .then()
+        .statusCode(404);
     }
+    
+    
+    
 
 }
