@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gowaiterless.api.menuList.MenuBook;
-import com.gowaiterless.api.menuList.MenuSequences;
+import com.gowaiterless.api.menuList.Sequences;
 import com.gowaiterless.api.menuList.repository.MenuBookRepository;
-import com.gowaiterless.api.menuList.repository.MenuSequencesRepository;
+import com.gowaiterless.api.menuList.repository.SequencesRepository;
 import com.gowaiterless.exception.ResourceNotFoundException;
 
 @Service
@@ -20,7 +20,7 @@ public class MenuBookService {
 	@Autowired
 	private MenuBookRepository menuBookRepository;
 	@Autowired
-	private MenuSequencesRepository menuSequencesRepository;
+	private SequencesRepository sequencesRepository;
 
 	public List<MenuBook> getMenuBooks() {
 		List<MenuBook> mbs=new ArrayList<MenuBook>();
@@ -37,8 +37,8 @@ public class MenuBookService {
 	public MenuBook addMenuBook(MenuBook menuBook) {
 		menuBook.setId(0);
 		menuBookRepository.saveAndFlush(menuBook);
-		menuSequencesRepository.saveAndFlush(new MenuSequences(menuBook.getId()+"_menu",1));
-		menuSequencesRepository.saveAndFlush(new MenuSequences(menuBook.getId()+"_submenu",1));
+		sequencesRepository.saveAndFlush(new Sequences(menuBook.getId()+"_menu",1));
+		sequencesRepository.saveAndFlush(new Sequences(menuBook.getId()+"_submenu",1));
 		
 		return menuBook;
 	}
@@ -51,8 +51,8 @@ public class MenuBookService {
 
 	public void deleteMenuBook(long id) {
 		menuBookRepository.delete(id);
-		menuSequencesRepository.delete(id+"_menu");
-		menuSequencesRepository.delete(id+"_submenu");
+		sequencesRepository.delete(id+"_menu");
+		sequencesRepository.delete(id+"_submenu");
 	}
 
 }

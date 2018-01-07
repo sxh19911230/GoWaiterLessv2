@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import com.gowaiterless.api.menuList.Menu;
 import com.gowaiterless.api.menuList.MenuBook;
 import com.gowaiterless.api.menuList.MenuId;
-import com.gowaiterless.api.menuList.MenuSequences;
+import com.gowaiterless.api.menuList.Sequences;
 import com.gowaiterless.api.menuList.SubMenu;
 import com.gowaiterless.api.menuList.SubMenuId;
 import com.gowaiterless.api.menuList.repository.MenuBookRepository;
 import com.gowaiterless.api.menuList.repository.MenuRepository;
-import com.gowaiterless.api.menuList.repository.MenuSequencesRepository;
+import com.gowaiterless.api.menuList.repository.SequencesRepository;
 import com.gowaiterless.api.menuList.repository.SubMenuRepository;
 import com.gowaiterless.exception.BadInputException;
 import com.gowaiterless.exception.ResourceNotFoundException;
@@ -29,7 +29,7 @@ public class MenuService {
 	@Autowired
 	SubMenuRepository subMenuRepository;
 	@Autowired
-	MenuSequencesRepository menuSequencesRepository;
+	SequencesRepository sequencesRepository;
 	
 	public List<Menu> getMenus(long menubookid) {
 		return menuRepository.findByMenuIdMenuBookId(menubookid).orElseThrow(()->new ResourceNotFoundException());
@@ -45,10 +45,10 @@ public class MenuService {
 		MenuBook mb = getMenuBook(menubookid);
 		m.getMenuId().setMenuBook(mb);;
 		if (existMenuBookMenuCode(m)!=null) throw new BadInputException("Duplicated Menu Code");
-		MenuSequences next = menuSequencesRepository.getOne(menubookid+"_menu");
+		Sequences next = sequencesRepository.getOne(menubookid+"_menu");
 		m.getMenuId().setMenuNum(next.getNext());
 		next.setNext(next.getNext()+1);
-		menuSequencesRepository.saveAndFlush(next);
+		sequencesRepository.saveAndFlush(next);
 		menuRepository.saveAndFlush(m);
 		return m;
 	}

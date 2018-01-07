@@ -31,17 +31,17 @@ public class ItemController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public List<Item> setItem(@PathVariable String restaurantid, @PathVariable long orderid, @RequestBody Item item) {
-		return itemService.setItem(restaurantid, orderid);
+	public ResponseEntity<Item> setItem(@PathVariable String restaurantid, @PathVariable long orderid, @RequestBody Item item) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(itemService.setItem(restaurantid, orderid, item));
 	}
 	
 	@RequestMapping(value="/{itemid}",method=RequestMethod.PUT)
-	public List<Item> updateItem(@PathVariable String restaurantid, @PathVariable long orderid,  @PathVariable int itemid, @RequestBody Item item) {
-		return itemService.updateItem(restaurantid, orderid, item);
+	public Item updateItem(@PathVariable String restaurantid, @PathVariable long orderid,  @PathVariable int itemid, @RequestBody Item item) {
+		return itemService.updateItem(restaurantid, orderid, itemid, item);
 	}
 	
 	@RequestMapping(value="/{itemid}",method=RequestMethod.DELETE)
 	public List<Item> deleteItem(@PathVariable String restaurantid, @PathVariable long orderid,  @PathVariable int itemid) {
-		return itemService.deleteItem(restaurantid, orderid);
+		return itemService.deleteItem(restaurantid, orderid, itemid);
 	}
 }

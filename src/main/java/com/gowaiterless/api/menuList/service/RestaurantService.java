@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.gowaiterless.api.menuList.MenuBook;
 import com.gowaiterless.api.menuList.Restaurant;
+import com.gowaiterless.api.menuList.Sequences;
 import com.gowaiterless.api.menuList.repository.MenuBookRepository;
-import com.gowaiterless.api.menuList.repository.MenuSequencesRepository;
+import com.gowaiterless.api.menuList.repository.SequencesRepository;
 import com.gowaiterless.api.menuList.repository.RestaurantRepository;
 import com.gowaiterless.exception.ResourceDuplicationException;
 import com.gowaiterless.exception.ResourceNotFoundException;
@@ -23,7 +24,7 @@ public class RestaurantService {
 	@Autowired
 	RestaurantRepository restaurantReprository;
 	@Autowired
-	MenuSequencesRepository menuSequencesRepository;
+	SequencesRepository sequencesRepository;
 	@Autowired
 	MenuBookRepository menuBookRepository;
 	
@@ -41,8 +42,10 @@ public class RestaurantService {
 	public Restaurant addRestaurant(Restaurant r) {
 		Restaurant t = restaurantReprository.findOne(r.getId());
 		if (t != null) throw new ResourceDuplicationException();
-
+		
+		sequencesRepository.saveAndFlush(new Sequences(r.getId()+"_order",1));
 		restaurantReprository.saveAndFlush(r);
+		
 		return r;
 	}
 	public Restaurant updateRestaurant(String restaurantId, Restaurant r) {
@@ -53,6 +56,7 @@ public class RestaurantService {
 	}
 	public void deleteRestaurant(String id) {
 		getRestaurant(id);
+		sequencesRepository.delete(id+"_order");
 		restaurantReprository.delete(id);
 
 	}

@@ -37,7 +37,7 @@ public class OrderController {
 	
 	@RequestMapping(value="/{orderid}",method=RequestMethod.PUT)
 	public Order updateOrder(@PathVariable String restaurantid, @PathVariable long orderid, @RequestBody Order order) {
-		return orderService.updateOrder(restaurantid, order);
+		return orderService.updateOrder(restaurantid, orderid, order);
 	}
 	
 	@RequestMapping(value="/{orderid}",method=RequestMethod.DELETE)

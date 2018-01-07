@@ -19,6 +19,11 @@ public class Order {
 	private int priceInCents;
 	private boolean readyToPay;
 	
+	public Order(OrderId orderid) {
+		orderId = orderid;
+	}
+	public Order(){}
+	
 	public OrderId getOrderId() {
 		return orderId;
 	}

@@ -17,6 +17,11 @@ public class OrderId implements Serializable {
 	@JsonIgnoreProperties({"address","restaurantPic","telephone","fax","email","menus","submenus"})
 	private Restaurant restaurant;
 	private long orderNum;
+	public OrderId(){}
+	public OrderId(Restaurant restaurant, long orderNum) {
+		this.restaurant=restaurant;
+		this.orderNum= orderNum;
+	}
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}

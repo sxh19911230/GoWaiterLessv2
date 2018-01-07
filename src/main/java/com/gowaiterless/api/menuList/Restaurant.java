@@ -1,15 +1,19 @@
 package com.gowaiterless.api.menuList;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gowaiterless.api.orderList.Order;
 
 @Entity
 public class Restaurant {
 	
-	
-
 	@Id
 	@Column(length = 50)
 	private String id;
@@ -21,6 +25,9 @@ public class Restaurant {
 	private String email;
 	@ManyToOne
 	private MenuBook menuBook;
+	@JsonIgnore
+	@OneToMany(mappedBy="orderId.restaurant")
+	private Collection<Order> orders;
 	
 	public Restaurant() {}
 	
@@ -77,6 +84,14 @@ public class Restaurant {
 
 	public void setMenuBook(MenuBook menuBook) {
 		this.menuBook = menuBook;
+	}
+	
+	public Collection<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Collection<Order> orders) {
+		this.orders = orders;
 	}
 	
 	@Override

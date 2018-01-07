@@ -7,6 +7,15 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 public class ItemId implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@ManyToOne
+	private Order order;
+	private int number;
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -45,7 +54,10 @@ public class ItemId implements Serializable {
 	public void setNumber(int number) {
 		this.number = number;
 	}
-	@ManyToOne
-	private Order order;
-	private int number;
+	public ItemId(){}
+	public ItemId(Order order, int number) {
+		super();
+		this.order = order;
+		this.number = number;
+	}
 }

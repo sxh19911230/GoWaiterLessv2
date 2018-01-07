@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class MenuSequences {
+public class Sequences {
 	
 	
 
@@ -12,9 +12,9 @@ public class MenuSequences {
 	private String menuId;
 	private int next;
 	
-	public MenuSequences(){}
+	public Sequences(){}
 	
-	public MenuSequences(String id, int i) {
+	public Sequences(String id, int i) {
 		menuId= id;
 		next = i;
 	}
