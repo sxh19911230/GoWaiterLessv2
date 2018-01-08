@@ -1,10 +1,14 @@
 package com.gowaiterless.api.orderList;
 
 import java.util.Collection;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 import com.gowaiterless.api.menuList.Choice;
@@ -17,9 +21,10 @@ public class Item {
 	private ItemId itemId;
 	
 	@ManyToOne
-	private Menu nemu;
-	@Embedded
-	private Collection<Choice> choiceList;
+	private Menu menu;
+	@ElementCollection (fetch=FetchType.EAGER)
+	@CollectionTable
+	private Set<Choice> choiceList;
 	private String specialInstruction;
 	private int quantity;
 	
@@ -29,16 +34,16 @@ public class Item {
 	public void setItemId(ItemId itemId) {
 		this.itemId = itemId;
 	}
-	public Menu getNemu() {
-		return nemu;
+	public Menu getMenu() {
+		return menu;
 	}
-	public void setNemu(Menu nemu) {
-		this.nemu = nemu;
+	public void setMenu(Menu menu) {
+		this.menu = menu;
 	}
-	public Collection<Choice> getChoiceList() {
+	public Set<Choice> getChoiceList() {
 		return choiceList;
 	}
-	public void setChoiceList(Collection<Choice> choiceList) {
+	public void setChoiceList(Set<Choice> choiceList) {
 		this.choiceList = choiceList;
 	}
 	public String getSpecialInstruction() {

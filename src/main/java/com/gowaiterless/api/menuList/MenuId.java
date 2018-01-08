@@ -6,13 +6,14 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Embeddable
 public class MenuId implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	private MenuBook menuBook;
 	
@@ -35,11 +36,12 @@ public class MenuId implements Serializable{
 	public void setMenuNum(long menuId) {
 		this.menuNum = menuId;
 	}
-	
+	@JsonIgnore
 	public MenuBook getMenuBook() {
 		return menuBook;
 	}
 
+	@JsonProperty
 	public void setMenuBook(MenuBook menuBook) {
 		this.menuBook = menuBook;
 	}

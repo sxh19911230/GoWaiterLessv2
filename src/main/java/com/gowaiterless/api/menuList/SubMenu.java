@@ -1,6 +1,7 @@
 package com.gowaiterless.api.menuList;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -25,7 +26,7 @@ public class SubMenu {
 	private int free;
 	@ElementCollection (fetch=FetchType.EAGER)
 	@CollectionTable( uniqueConstraints = {@UniqueConstraint(columnNames={"SubMenu_menuBook_id","choiceCode"})})
-	private Collection<Choice> choices;
+	private Set<Choice> choices;
 	/*
 	@JsonIgnore
 	@ManyToMany(mappedBy="subMenus")
@@ -74,10 +75,10 @@ public class SubMenu {
 	public void setFree(int free) {
 		this.free = free;
 	}
-	public Collection<Choice> getChoices() {
+	public Set<Choice> getChoices() {
 		return choices;
 	}
-	public void setChoices(Collection<Choice> choices) {
+	public void setChoices(Set<Choice> choices) {
 		this.choices = choices;
 	}
 	public String getSubMenuDescription() {

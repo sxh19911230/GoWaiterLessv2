@@ -1,10 +1,12 @@
 package com.gowaiterless.api.orderList.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +20,13 @@ import com.gowaiterless.api.orderList.Order;
 import com.gowaiterless.api.orderList.OrderId;
 import com.gowaiterless.api.orderList.repository.ItemRepository;
 import com.gowaiterless.api.orderList.repository.OrderRepository;
+import com.gowaiterless.exception.ResourceNotFoundException;
 
 @Service
 @Transactional
 public class OrderService {
+	
+	
 	@Autowired
 	OrderRepository orderRepository;
 	@Autowired
@@ -36,7 +41,9 @@ public class OrderService {
 	}
 
 	public Order getOrder(String restaurantid, long orderid) {
-		return orderRepository.findOne(new OrderId(restaurantService.getRestaurant(restaurantid),orderid));
+		Order o = orderRepository.findOne(new OrderId(restaurantService.getRestaurant(restaurantid),orderid));
+		if (o == null) throw new ResourceNotFoundException();
+		return o;
 	}
 
 	public Order updateOrder(String restaurantid, long orderid, Order order) {
@@ -49,15 +56,21 @@ public class OrderService {
 	}
 
 	public Order placeOrder(String restaurantid, Order order) {
+		System.out.println("test 000");
+
 		//set id
 		Restaurant r = restaurantService.getRestaurant(restaurantid);
+		System.out.println("test 001");
 		Sequences a = sequenceRepository.getOne(restaurantid+"_order");
 		order.setOrderId(new OrderId(r,a.getNext()));
 		a.setNext(a.getNext()+1);
 		sequenceRepository.save(a);
+		//set time
+		order.setPlacedTime(new Timestamp(System.currentTimeMillis()));
 		//save items
 		int i = 0;
 		for (Item item : order.getItems()) {
+			System.out.println("test 002 : num: "+item.getMenu().getMenuId());//.getMenuId().getMenuNum()+"bookid:" + item.getMenu().getMenuId().getMenuBook().getId());
 			item.setItemId(new ItemId(order, ++i));
 			itemRepository.save(item);
 		}

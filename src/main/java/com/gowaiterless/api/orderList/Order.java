@@ -1,23 +1,30 @@
 package com.gowaiterless.api.orderList;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="orders")
 public class Order {
 	
-	
 	@EmbeddedId
 	private OrderId orderId;
-	@OneToMany(mappedBy="itemId.order")
-	private Collection<Item> items;
+	
+	
+	@OneToMany(mappedBy="itemId.order", fetch=FetchType.LAZY)
+	private Collection<Item> items = new ArrayList<Item>();
 	private int priceInCents;
-	private boolean readyToPay;
+	private boolean paid;
+	private Timestamp placedTime;
 	
 	public Order(OrderId orderid) {
 		orderId = orderid;
@@ -30,9 +37,11 @@ public class Order {
 	public void setOrderId(OrderId orderId) {
 		this.orderId = orderId;
 	}
+	@JsonIgnore
 	public Collection<Item> getItems() {
 		return items;
 	}
+	@JsonProperty
 	public void setItems(Collection<Item> items) {
 		this.items = items;
 	}
@@ -42,11 +51,11 @@ public class Order {
 	public void setPriceInCents(int priceInCents) {
 		this.priceInCents = priceInCents;
 	}
-	public boolean isReadyToPay() {
-		return readyToPay;
+	public boolean isPaid() {
+		return paid;
 	}
-	public void setReadyToPay(boolean readyToPay) {
-		this.readyToPay = readyToPay;
+	public void setPaid(boolean paid) {
+		this.paid = paid;
 	}
 	
 	@Override
@@ -71,5 +80,12 @@ public class Order {
 		} else if (!orderId.equals(other.orderId))
 			return false;
 		return true;
+	}
+	
+	public Timestamp getPlacedTime() {
+		return placedTime;
+	}
+	public void setPlacedTime(Timestamp placedTime) {
+		this.placedTime = placedTime;
 	}
 }
