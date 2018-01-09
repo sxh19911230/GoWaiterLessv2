@@ -5,30 +5,8 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Choice {
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((choiceCode == null) ? 0 : choiceCode.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Choice other = (Choice) obj;
-		if (choiceCode == null) {
-			if (other.choiceCode != null)
-				return false;
-		} else if (!choiceCode.equals(other.choiceCode))
-			return false;
-		return true;
-	}
-	@Column(nullable = false)
+	
+	@Column(nullable = false, length=10)
 	private String choiceCode;
 	private String choiceName;
 	private String choiceDiscription;
@@ -56,5 +34,28 @@ public class Choice {
 	}
 	public void setPriceInCents(int priceInCents) {
 		this.priceInCents = priceInCents;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((choiceCode == null) ? 0 : choiceCode.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Choice other = (Choice) obj;
+		if (choiceCode == null) {
+			if (other.choiceCode != null)
+				return false;
+		} else if (!choiceCode.equals(other.choiceCode))
+			return false;
+		return true;
 	}
 }

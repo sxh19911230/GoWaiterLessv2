@@ -1,6 +1,5 @@
 package com.gowaiterless.api.menuList;
 
-import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -8,15 +7,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Proxy;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class SubMenu {
+	
 	@EmbeddedId
 	private SubMenuId subMenuId;
 	private String subMenuName;
@@ -27,22 +22,10 @@ public class SubMenu {
 	@ElementCollection (fetch=FetchType.EAGER)
 	@CollectionTable( uniqueConstraints = {@UniqueConstraint(columnNames={"SubMenu_menuBook_id","choiceCode"})})
 	private Set<Choice> choices;
-	/*
-	@JsonIgnore
-	@ManyToMany(mappedBy="subMenus")
-	private Collection<Menu> menus;
-	*/
+
 	public SubMenu(){subMenuId = new SubMenuId();}
 	public SubMenu(SubMenuId id){subMenuId=id;}
 
-	/*
-	public Collection<Menu> getMenus() {
-		return menus;
-	}
-	public void setMenus(Collection<Menu> menus) {
-		this.menus = menus;
-	}
-	*/
 	
 	public SubMenuId getSubMenuId() {
 		return subMenuId;
@@ -86,6 +69,30 @@ public class SubMenu {
 	}
 	public void setSubMenuDescription(String subMenuDescription) {
 		this.subMenuDescription = subMenuDescription;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((subMenuId == null) ? 0 : subMenuId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SubMenu other = (SubMenu) obj;
+		if (subMenuId == null) {
+			if (other.subMenuId != null)
+				return false;
+		} else if (!subMenuId.equals(other.subMenuId))
+			return false;
+		return true;
 	}
 
 }

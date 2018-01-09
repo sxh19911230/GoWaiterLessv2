@@ -11,4 +11,5 @@ import com.gowaiterless.api.orderList.Order;
 
 public interface ItemRepository extends JpaRepository<Item, ItemId> {
 	Optional<List<Item>> findByItemIdOrder(Order order);
+	//Item findByItemIdOrderItemsItemId(ItemId itemId);
 }

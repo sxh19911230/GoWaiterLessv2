@@ -32,7 +32,7 @@ public class ItemService {
 	}
 
 	public Item getItem(String restaurantid, long orderid, int itemid) {
-		return itemRepository.getOne(new ItemId(orderService.getOrder(restaurantid, orderid), itemid));
+		return itemRepository.findOne(new ItemId(orderService.getOrder(restaurantid, orderid), itemid));
 	}
 
 	public Item setItem(String restaurantid, long orderid, Item item) {

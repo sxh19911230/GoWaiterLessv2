@@ -1,7 +1,7 @@
 package com.gowaiterless.api.menuList;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -11,8 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames = {"menuBook_id" , "menuCode"})})
 public class Menu {
@@ -21,7 +19,7 @@ public class Menu {
 
 	
 	@ManyToMany(fetch=FetchType.EAGER)
-	private Collection<SubMenu> subMenus=new ArrayList<SubMenu>();
+	private Set<SubMenu> subMenus=new HashSet<SubMenu>();
 	
 	@Column(length=10)
 	private String menuCode;
@@ -35,10 +33,10 @@ public class Menu {
 	public Menu(){menuId = new MenuId();}
 	public Menu(MenuId id) {menuId=id;}
 	
-	public Collection<SubMenu> getSubMenus() {
+	public Set<SubMenu> getSubMenus() {
 		return subMenus;
 	}
-	public void setSubMenus(Collection<SubMenu> submenus) {
+	public void setSubMenus(Set<SubMenu> submenus) {
 		this.subMenus = submenus;
 	}
 	public MenuId getMenuId() {
