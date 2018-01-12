@@ -10,6 +10,18 @@
     <servlet-name>gowaiterlessapi</servlet-name>
     <url-pattern>/v1/*</url-pattern>
   </servlet-mapping>
+  <filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+  <init-param>
+    <param-name>cors.allowed.methods</param-name>
+    <param-value>GET,POST,PUT,DELETE</param-value>
+  </init-param>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
   <!--detail>
   <filter>
     <filter-name>springSecurityFilterChain</filter-name>
