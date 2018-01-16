@@ -27,7 +27,7 @@ public class Menu {
 	private String dishName;
 	private String dishDescription;
 	private String picture;
-	private int basePriceInCent;
+	private long basePriceInCent;
 	private boolean active = true;
 	
 	public Menu(){menuId = new MenuId();}
@@ -63,10 +63,10 @@ public class Menu {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	public int getBasePriceInCent() {
+	public long getBasePriceInCent() {
 		return basePriceInCent;
 	}
-	public void setBasePriceInCent(int basePriceInCent) {
+	public void setBasePriceInCent(long basePriceInCent) {
 		this.basePriceInCent = basePriceInCent;
 	}
 

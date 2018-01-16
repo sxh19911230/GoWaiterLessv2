@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gowaiterless.api.exception.ResourceNotFoundException;
 import com.gowaiterless.api.menuList.Restaurant;
 import com.gowaiterless.api.menuList.Sequences;
 import com.gowaiterless.api.menuList.repository.SequencesRepository;
@@ -20,7 +21,6 @@ import com.gowaiterless.api.orderList.Order;
 import com.gowaiterless.api.orderList.OrderId;
 import com.gowaiterless.api.orderList.repository.ItemRepository;
 import com.gowaiterless.api.orderList.repository.OrderRepository;
-import com.gowaiterless.exception.ResourceNotFoundException;
 
 @Service
 @Transactional

@@ -1,10 +1,7 @@
-package com.gowaiterless.exception;
+package com.gowaiterless.api.exception;
 
-import org.springframework.web.bind.annotation.ResponseStatus;
+import java.io.IOException;
 
-import org.springframework.http.HttpStatus;
-
-@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="unable to find item")
 public class ResourceNotFoundException extends RuntimeException {
 	
 	/**
@@ -16,6 +13,10 @@ public class ResourceNotFoundException extends RuntimeException {
 
 	public ResourceNotFoundException(String string) {
 		super(string);
+	}
+
+	public ResourceNotFoundException(Exception e) {
+		super(e);
 	}
 
 }
