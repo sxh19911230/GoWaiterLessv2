@@ -2,6 +2,7 @@ package com.gowaiterless.api.menuList;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 
 import org.hibernate.annotations.Proxy;
 
@@ -17,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Proxy(lazy = false)
 public class MenuBook {
+	
 	
 	
 	@Id
@@ -33,6 +36,9 @@ public class MenuBook {
 	@OneToMany (mappedBy="subMenuId.menuBook", fetch=FetchType.LAZY)
 	private Collection<SubMenu> subMenus= new ArrayList<SubMenu>();
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="menuBook")
+	private Set<Restaurant> restaurants;
 
 	/* TODO
 	the view, design, structure of the menu.
@@ -49,7 +55,12 @@ public class MenuBook {
 	public void setId(long menuBookId) {
 		this.id = menuBookId;
 	}
-	
+	public Set<Restaurant> getRestaurants() {
+		return restaurants;
+	}
+	public void setRestaurants(Set<Restaurant> restaurants) {
+		this.restaurants = restaurants;
+	}
 	public Collection<Menu> getMenus() {
 		return menus;
 	}
@@ -89,6 +100,11 @@ public class MenuBook {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+	
+	@PreRemove
+	public void nullifRemoved() {
+		restaurants.forEach(r->r.setMenuBook(null));
 	}
 	
 
