@@ -23,7 +23,7 @@ public class Item {
 	@ElementCollection (fetch=FetchType.EAGER)
 	@CollectionTable
 	@Column(length=10,nullable=false)
-	private Set<String> choiceList;
+	private Set<Long> choiceList;
 	private String specialInstruction;
 	private int quantity;
 	
@@ -39,10 +39,10 @@ public class Item {
 	public void setMenu(Menu menu) {
 		this.menu = menu;
 	}
-	public Set<String> getChoiceList() {
+	public Set<Long> getChoiceList() {
 		return choiceList;
 	}
-	public void setChoiceList(Set<String> choiceList) {
+	public void setChoiceList(Set<Long> choiceList) {
 		this.choiceList = choiceList;
 	}
 	public String getSpecialInstruction() {

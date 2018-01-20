@@ -45,15 +45,17 @@ public class MenuController {
 		menuService.deleteMenu(menubookid, menuId);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
+	
+	//Set submenus
 	@RequestMapping(value="/{menuId}/submenu",method=RequestMethod.POST)
-	public ResponseEntity<?> addSubMenu(@PathVariable long menubookid, @PathVariable long menuId, @RequestBody SubMenu subMenu) {
-		menuService.addSubMenu(menubookid,menuId,subMenu.getSubMenuId().getSubMenuNum());
+	public ResponseEntity<?> addSubMenus(@PathVariable long menubookid, @PathVariable long menuId, @RequestBody SubMenu [] subMenus) {
+		menuService.addSubMenus(menubookid,menuId,subMenus);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
-	
+	//Delete submenus
 	@RequestMapping(value="/{menuId}/submenu",method=RequestMethod.DELETE)
-	public ResponseEntity<?> deleteSubMenu(@PathVariable long menubookid, @PathVariable long menuId, @RequestBody SubMenu subMenu) {
-		menuService.deleteSubMenu(menubookid, menuId,subMenu.getSubMenuId().getSubMenuNum());
+	public ResponseEntity<?> deleteSubMenu(@PathVariable long menubookid, @PathVariable long menuId) {
+		menuService.deleteSubMenus(menubookid, menuId);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 }

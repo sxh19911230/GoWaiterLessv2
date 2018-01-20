@@ -6,11 +6,20 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Choice {
 	
+	
+	private int id;
 	@Column(nullable = false, length=10)
 	private String choiceCode;
 	private String choiceName;
 	private String choiceDiscription;
 	private int priceInCents;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getChoiceCode() {
 		return choiceCode;
 	}

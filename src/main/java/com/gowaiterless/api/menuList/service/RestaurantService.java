@@ -49,8 +49,10 @@ public class RestaurantService {
 		return r;
 	}
 	public Restaurant updateRestaurant(String restaurantId, Restaurant r) {
-		getRestaurant(restaurantId);
+		Restaurant rt = getRestaurant(restaurantId);
+		 
 		r.setId(restaurantId);
+		r.setMenuBook(rt.getMenuBook());
 		restaurantReprository.saveAndFlush(r);
 		return r;
 	}

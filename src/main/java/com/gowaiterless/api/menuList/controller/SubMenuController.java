@@ -31,7 +31,7 @@ public class SubMenuController {
 	}
 	
 	@RequestMapping(value="submenu", method=RequestMethod.GET)
-	public List<SubMenu> getRestaurantSubMenus(@PathVariable long menubookid) {
+	public List<SubMenu> getMenuBookSubMenus(@PathVariable long menubookid) {
 		return subMenuService.getSubMenus(menubookid);
 	}
 	
@@ -44,7 +44,6 @@ public class SubMenuController {
 	public SubMenu updateMenu(@PathVariable long menubookid,@PathVariable long subMenuId, @RequestBody SubMenu subMenu) {
 		return subMenuService.updateSubMenu(menubookid, subMenuId, subMenu);
 	}
-	
 	@RequestMapping(value="submenu/{subMenuId}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> deleteMenu(@PathVariable long menubookid, @PathVariable long subMenuId) {
 		subMenuService.deleteSubMenu(menubookid, subMenuId);

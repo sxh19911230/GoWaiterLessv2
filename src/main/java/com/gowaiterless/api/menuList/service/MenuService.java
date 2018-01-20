@@ -1,5 +1,7 @@
 package com.gowaiterless.api.menuList.service;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import javax.transaction.Transactional;
 
@@ -43,7 +45,10 @@ public class MenuService {
 	public Menu addMenu(long menubookid, Menu m) {
 		
 		MenuBook mb = getMenuBook(menubookid);
-		m.getMenuId().setMenuBook(mb);;
+		m.getMenuId().setMenuBook(mb);
+		for(SubMenu s : m.getSubMenus())
+			s.getSubMenuId().setMenuBook(mb);
+		
 		if (existMenuBookMenuCode(m)!=null) throw new BadInputException("Duplicated Menu Code");
 		Sequences next = sequencesRepository.getOne(menubookid+"_menu");
 		m.getMenuId().setMenuNum(next.getNext());
@@ -58,6 +63,9 @@ public class MenuService {
 		//menu exists
 		getMenu(menubookid, menuId);
 		m.getMenuId().setMenuBook(mb);
+		//set submenu bookid
+		for(SubMenu s : m.getSubMenus())
+			s.getSubMenuId().setMenuBook(mb);
 		//Menu Code must be unique in a restaurant
 		Menu t = existMenuBookMenuCode(m);
 		m.setMenuId(new MenuId(mb, menuId));
@@ -73,15 +81,19 @@ public class MenuService {
 		menuRepository.delete(new MenuId(m, menuId));
 	}
 
-	public void addSubMenu(long menukoobid, long menuId, long subMenuId) {
+	public void addSubMenus(long menukoobid, long menuId, SubMenu [] subMenus) {
 		Menu m = getMenu(menukoobid, menuId);
-		m.getSubMenus().add(getSubMenu(menukoobid,subMenuId));
+		MenuBook mb = new MenuBook(menukoobid);
+		for (SubMenu s : subMenus) {
+			s.getSubMenuId().setMenuBook(mb);
+		}
+		m.setSubMenus(new HashSet<SubMenu>(Arrays.asList(subMenus)));
 		menuRepository.saveAndFlush(m);
 	}
 	
-	public void deleteSubMenu(long menubookid, long menuId, long subMenuId) {
+	public void deleteSubMenus(long menubookid, long menuId) {
 		Menu m = getMenu(menubookid, menuId);
-		m.getSubMenus().removeIf(s->s.getSubMenuId().getSubMenuNum()==subMenuId&&s.getSubMenuId().getMenuBook().getId()==menubookid);
+		m.getSubMenus().clear();
 		menuRepository.saveAndFlush(m);
 	}
 	

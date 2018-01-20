@@ -39,6 +39,7 @@ public class MenuBookService {
 		menuBookRepository.saveAndFlush(menuBook);
 		sequencesRepository.saveAndFlush(new Sequences(menuBook.getId()+"_menu",1));
 		sequencesRepository.saveAndFlush(new Sequences(menuBook.getId()+"_submenu",1));
+		sequencesRepository.saveAndFlush(new Sequences(menuBook.getId()+"_choice",1));
 		
 		return menuBook;
 	}
@@ -53,6 +54,7 @@ public class MenuBookService {
 		menuBookRepository.delete(id);
 		sequencesRepository.delete(id+"_menu");
 		sequencesRepository.delete(id+"_submenu");
+		sequencesRepository.delete(id+"_choice");
 	}
 
 }

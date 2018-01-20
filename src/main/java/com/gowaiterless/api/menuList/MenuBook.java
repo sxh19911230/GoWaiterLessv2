@@ -39,7 +39,10 @@ public class MenuBook {
 	how it looks
 	XML design?
 	 */
-	
+	public MenuBook() {}
+	public MenuBook(long menukoobid) {
+		id=menukoobid;
+	}
 	public long getId() {
 		return id;
 	}

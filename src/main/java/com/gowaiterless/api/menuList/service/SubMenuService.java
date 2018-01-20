@@ -37,7 +37,7 @@ public class SubMenuService {
 		
 		MenuBook mb = getMenuBook(menubookid);
 		s.getSubMenuId().setMenuBook(mb);
-		validateSubMenu(s);
+		assignChoiceId(s);
 		Sequences next = sequencesRepository.getOne(menubookid+"_submenu");
 		s.getSubMenuId().setSubMenuNum(next.getNext());
 		next.setNext(next.getNext()+1);
@@ -45,12 +45,14 @@ public class SubMenuService {
 		subMenuRepository.saveAndFlush(s);
 		return s;
 	}
+	
+
 	public SubMenu updateSubMenu(long menubookid, long subMenuId, SubMenu s) {
 		
 		getSubMenu(menubookid, subMenuId);
 		s.getSubMenuId().setSubMenuNum(subMenuId);
 		s.getSubMenuId().setMenuBook(getMenuBook(menubookid));
-		validateSubMenu(s);
+		assignChoiceId(s);
 		subMenuRepository.saveAndFlush(s);
 		return s;
 	}
@@ -75,11 +77,14 @@ public class SubMenuService {
 		return s;
 	}
 	
-	private void validateSubMenu(SubMenu s) {
-		if (s.getChoices() != null)
-		  for (Choice c : s.getChoices())
-		    if (subMenuRepository.findBySubMenuIdMenuBookIdAndChoicesChoiceCode(s.getSubMenuId().getMenuBook().getId(), c.getChoiceCode()) != null)
-			  throw new BadInputException();
+	private void assignChoiceId(SubMenu s) {
+		Sequences seq = sequencesRepository.getOne(s.getSubMenuId().getMenuBook().getId()+"_choice");
+		int next = seq.getNext();
+		for ( Choice c : s.getChoices())
+			if (c.getId() == 0) c.setId(next++);
+		seq.setNext(next);
+		sequencesRepository.save(seq);
+		
 	}
 
 }

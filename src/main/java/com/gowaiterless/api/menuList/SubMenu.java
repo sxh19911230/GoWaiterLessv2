@@ -16,11 +16,11 @@ public class SubMenu {
 	private SubMenuId subMenuId;
 	private String subMenuName;
 	private String subMenuDescription;
-	private boolean inclusive;
+	private boolean multipal;
 	private int allowed;
 	private int free;
 	@ElementCollection (fetch=FetchType.EAGER)
-	@CollectionTable( uniqueConstraints = {@UniqueConstraint(columnNames={"SubMenu_menuBook_id","choiceCode"})})
+	@CollectionTable( uniqueConstraints = {@UniqueConstraint(columnNames={"SubMenu_menuBook_id","id"})})
 	private Set<Choice> choices;
 
 	public SubMenu(){subMenuId = new SubMenuId();}
@@ -40,11 +40,11 @@ public class SubMenu {
 	public void setSubMenuName(String subMenuName) {
 		this.subMenuName = subMenuName;
 	}
-	public boolean isInclusive() {
-		return inclusive;
+	public boolean isMultipal() {
+		return multipal;
 	}
-	public void setInclusive(boolean inclusive) {
-		this.inclusive = inclusive;
+	public void SetMultipal(boolean multipal) {
+		this.multipal = multipal;
 	}
 	public int getAllowed() {
 		return allowed;
